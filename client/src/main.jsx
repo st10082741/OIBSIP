@@ -4,16 +4,16 @@ import React from "react";
 // ReactDOM connects our React application to the web page
 import ReactDOM from "react-dom/client";
 
+// Import the application's root component
+import App from "./App";
+
 // Import global styles used across the application
 import "./index.css";
 
-// Import our application's routing configuration
-import AppRoutes from "./routes/AppRoutes";
-
-// Render the application into the HTML page
+// Render the React application into the HTML page
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // StrictMode helps identify potential issues while developing
+  // StrictMode helps identify potential issues during development
   <React.StrictMode>
-    <AppRoutes />
+    <App />
   </React.StrictMode>,
 );
