@@ -1,0 +1,37 @@
+/* ==========================================
+   HERO COMPONENT
+========================================== */
+
+.hero {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 80vh;
+
+  padding: 60px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 56px;
+
+  margin-bottom: 20px;
+
+  color: var(--text-dark);
+}
+
+.hero-content p {
+  font-size: 20px;
+
+  line-height: 1.7;
+
+  margin-bottom: 30px;
+
+  color: #666;
+}

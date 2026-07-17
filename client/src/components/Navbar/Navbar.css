@@ -1,0 +1,47 @@
+/* ==========================================
+   NAVBAR COMPONENT
+========================================== */
+
+.navbar {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px 60px;
+
+  background: white;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  color: var(--primary-color);
+
+  font-size: 28px;
+
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+
+  gap: 30px;
+
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+
+  color: var(--text-dark);
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}

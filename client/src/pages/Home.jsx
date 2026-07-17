@@ -1,14 +1,39 @@
-// Home page shown when users face visit the website.
+// Home page displayed when users first visit the website.
+
+// Import the Hero component to display the hero section.
+import Hero from "../components/Hero/Hero";
+// Import the PizzaCard component
+import PizzaCard from "../components/PizzaCard/PizzaCard";
+import "./Home.css";
+// Import the temporary pizza data
+import pizzas from "../data/pizzas";
 function Home() {
   return (
-    // Container for the home page.
+    // Container for the Home page.
     <div className="home">
-      {/* Main heading of the page */}
-      <h1>Welcome to Our Pizza Store</h1>
-      <p>Discover our delicious pizzas and order online.</p>
+      {/* Display the Hero section */}
+      <Hero />
+      {/* Featured pizzas section */}
+      <section className="featured-pizzas">
+        <h2>Featured Pizzas</h2>
+
+        <div className="pizza-grid">
+          {pizzas.map((pizza) => (
+            <PizzaCard
+              key={pizza.id}
+              image={pizza.image}
+              name={pizza.name}
+              description={pizza.description}
+              price={pizza.price}
+              rating={pizza.rating}
+              popular={pizza.popular}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
-// Makes this component available to other files.
+// Make this component available to other files.
 export default Home;

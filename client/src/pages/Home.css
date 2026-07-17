@@ -1,0 +1,27 @@
+/* ==========================================
+   HOME PAGE
+========================================== */
+
+.home {
+  padding-bottom: 60px;
+}
+
+.featured-pizzas {
+  padding: 60px;
+}
+
+.featured-pizzas h2 {
+  margin-bottom: 30px;
+
+  font-size: 36px;
+
+  text-align: center;
+}
+
+.pizza-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  gap: 30px;
+}

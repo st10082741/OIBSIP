@@ -1,20 +1,26 @@
 // Outlet displays whichever dashboard page is currently active
 import { Outlet } from "react-router-dom";
 
-// Shared layout for the main application
+// Import the Navbar component used across the application
+import Navbar from "../components/Navbar/Navbar";
+
+// import footer component for consistent footer across pages
+import Footer from "../components/Footer/Footer";
+// Shared layout for all protected pages
 function DashboardLayout() {
   return (
-    // The main container for the dashboard layout
+    // Main container for the dashboard pages
     <div className="dashboard-layout">
-      {/* Header section */}
-      <header>
-        <h2>Pizza Delivery</h2>
-      </header>
+      {/* Display the navigation bar */}
+      <Navbar />
 
-      {/* Main content area */}
+      {/* Render the page that matches the current route */}
       <main>
+        {/* Outlet is a placeholder for the active page component */}
         <Outlet />
       </main>
+      {/* Display the footer */}
+      <Footer />
     </div>
   );
 }

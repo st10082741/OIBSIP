@@ -1,0 +1,97 @@
+/* ==========================================
+   PIZZA CARD
+========================================== */
+
+.pizza-card {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.pizza-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.pizza-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.pizza-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.pizza-card:hover .pizza-image {
+  transform: scale(1.08);
+}
+
+.popular-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #ff6b35;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 2;
+  box-shadow: var(--shadow-sm);
+  transition: 0.3s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.pizza-content {
+  padding: 24px;
+}
+
+.pizza-content h3 {
+  margin-bottom: 10px;
+}
+
+.rating {
+  color: goldenrod;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.pizza-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.card-footer h4 {
+  color: var(--primary-color);
+  margin: 0;
+}
