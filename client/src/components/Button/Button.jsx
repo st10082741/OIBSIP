@@ -1,20 +1,26 @@
 // Import the CSS file that styles this Button component
 import "./Button.css";
 
-// Define the reusable Button component that takes in text and an onClick handler as props
-function Button({ text, onClick }) {
+// Reusable Button Component
+function Button({
+  text,
+  onClick,
+  variant = "primary",
+  size = "medium",
+  disabled = false,
+  type = "button",
+}) {
   return (
-    // Render a button element with the provided text and onClick handler
     <button
-      // Apply the CSS class for styling
-      className="button"
-      // Attach the onClick handler passed as a prop to the button
+      type={type}
+      className={`button ${variant} ${size}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {text}
     </button>
   );
 }
 
-// Export the component so other files can use it
+// Export the component
 export default Button;

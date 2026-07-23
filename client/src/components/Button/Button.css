@@ -1,45 +1,109 @@
-/* ===========================================================
-   BUTTON COMPONENT
-   -----------------------------------------------------------
-   These styles apply ONLY to our Button component.
-=========================================================== */
-
-/* Main button styling */
-
 .button {
-  background: var(--primary-color);
-
-  color: white;
-
   padding: 14px 28px;
-
   border: none;
-
   border-radius: var(--radius-md);
-
   font-size: 16px;
-
   font-weight: bold;
-
   cursor: pointer;
-
   transition: 0.3s;
-
   box-shadow: var(--shadow-sm);
 }
 
-/* Mouse hover effect */
-
-.button:hover {
-  background: var(--primary-hover);
-
-  transform: translateY(-2px);
-
-  box-shadow: var(--shadow-md);
+/* Primary button */
+.button.primary {
+  background: var(--primary-color);
+  color: white;
 }
 
-/* Small animation when clicked */
+.button.primary:hover {
+  background: var(--primary-hover);
+}
+
+/* Danger button */
+.button.danger {
+  background: crimson;
+  color: white;
+}
+
+.button.danger:hover {
+  background: darkred;
+}
+
+/* Success button */
+.button.success {
+  background: seagreen;
+  color: white;
+}
+
+.button.success:hover {
+  background: #1f7a4c;
+}
+
+/* Secondary button */
+.button.secondary {
+  background: #555;
+  color: white;
+}
+
+.button.secondary:hover {
+  background: #444;
+}
 
 .button:active {
   transform: scale(0.98);
+}
+
+/* ==========================
+   Button Sizes
+========================== */
+
+.button.small {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.button.medium {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
+.button.large {
+  padding: 18px 36px;
+  font-size: 18px;
+}
+
+/* ==========================================
+   BUTTON SIZES
+========================================== */
+
+.button.small {
+  padding: 8px 14px;
+
+  font-size: 13px;
+}
+
+.button.medium {
+  padding: 14px 28px;
+
+  font-size: 16px;
+}
+
+.button.large {
+  padding: 18px 40px;
+
+  font-size: 18px;
+}
+
+/* ==========================================
+   DISABLED BUTTON
+========================================== */
+
+.button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
 }

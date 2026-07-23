@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 
 // Import styles for this component
 import "./Navbar.css";
-
+// Import React's useContext hook
+import { useContext } from "react";
+// Import the shopping cart context
+import { CartContext } from "../../context/CartContext";
 // Reusable navigation bar displayed across the application
 function Navbar() {
+  // Access the shopping cart
+  const { getCartCount } = useContext(CartContext);
+
   return (
     <nav className="navbar">
       {/* Application logo */}
@@ -27,6 +33,11 @@ function Navbar() {
 
         <li>
           <Link to="/profile">Profile</Link>
+        </li>
+        <li>
+          <Link to="/cart" className="cart-button">
+            🛒 Cart ({getCartCount()})
+          </Link>
         </li>
       </ul>
     </nav>

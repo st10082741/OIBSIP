@@ -15,7 +15,7 @@ function DashboardLayout() {
       <Navbar />
 
       {/* Render the page that matches the current route */}
-      <main>
+      <main className="main-content">
         {/* Outlet is a placeholder for the active page component */}
         <Outlet />
       </main>

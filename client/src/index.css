@@ -18,8 +18,8 @@
 :root {
   /* ---------- Primary Brand Colours ---------- */
 
-  --primary-color: #e63946;
-  --primary-hover: #d62839;
+  --primary-color: #ff6b35;
+  --primary-hover: #e85d2a;
 
   /* ---------- Secondary Colours ---------- */
 
@@ -109,4 +109,33 @@ img {
   max-width: 100%;
 
   display: block;
+}
+
+/* ===========================================================
+   APPLICATION LAYOUT
+   -----------------------------------------------------------
+   This layout ensures the footer always stays at the bottom
+   of the screen, even when a page has very little content.
+=========================================================== */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Dashboard Layout */
+
+.dashboard-layout {
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+/* Main Page Content */
+
+.main-content {
+  flex: 1;
 }

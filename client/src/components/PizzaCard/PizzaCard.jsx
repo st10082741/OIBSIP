@@ -4,8 +4,16 @@ import Button from "../Button/Button";
 // Import the component styles
 import "./PizzaCard.css";
 
+// Import React's useContext hook
+import { useContext } from "react";
+
+// Import the shopping cart context
+import { CartContext } from "../../context/CartContext";
+
 // Reusable card used to display a pizza
-function PizzaCard({ image, name, description, price, rating, popular }) {
+function PizzaCard({ id, image, name, description, price, rating, popular }) {
+  // Access the shared shopping cart
+  const { addToCart } = useContext(CartContext);
   return (
     <div className="pizza-card">
       {/* Pizza image container */}
@@ -30,7 +38,17 @@ function PizzaCard({ image, name, description, price, rating, popular }) {
 
           <Button
             text="Add to Cart"
-            onClick={() => alert(`${name} added to cart!`)}
+            onClick={() =>
+              addToCart({
+                id,
+                image,
+                name,
+                description,
+                price,
+                rating,
+                popular,
+              })
+            }
           />
         </div>
       </div>

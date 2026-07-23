@@ -1,0 +1,352 @@
+/* ===========================================================
+   CART ITEM
+   -----------------------------------------------------------
+   Each pizza inside the shopping cart is displayed inside
+   its own white card.
+=========================================================== */
+
+.cart-item {
+  background: white;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===========================================================
+   CART ACTIONS
+   -----------------------------------------------------------
+   Groups the quantity controls and the Remove link together.
+   The Remove link will sit directly underneath the quantity
+   controls and remain centered.
+=========================================================== */
+
+.cart-actions {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 120px;
+}
+
+/* ===========================================================
+   QUANTITY CONTROLS
+   -----------------------------------------------------------
+   Contains the minus button, quantity number and plus button.
+=========================================================== */
+
+.quantity-controls {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 15px;
+}
+
+/* ===========================================================
+   PLUS / MINUS BUTTONS
+=========================================================== */
+
+.quantity-controls button {
+  width: 35px;
+
+  height: 35px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  background: var(--secondary-color);
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+/* Hover effect */
+
+.quantity-controls button:hover {
+  transform: scale(1.05);
+}
+
+/* ===========================================================
+   QUANTITY NUMBER
+=========================================================== */
+
+.quantity-controls span {
+  font-weight: bold;
+
+  font-size: 18px;
+
+  min-width: 20px;
+
+  text-align: center;
+}
+
+/* ===========================================================
+   REMOVE LINK
+   -----------------------------------------------------------
+   Looks like a text action instead of a large button.
+=========================================================== */
+
+.remove-link {
+  margin-top: 10px;
+
+  background: transparent;
+
+  border: none;
+
+  color: crimson;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* Hover effect */
+
+.remove-link:hover {
+  color: darkred;
+
+  text-decoration: underline;
+}
+
+/* ===========================================================
+   CART PIZZA IMAGE
+=========================================================== */
+
+.cart-image {
+  width: 120px;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+}
+
+/* ===========================================================
+   CART LAYOUT
+=========================================================== */
+
+.cart-item {
+  display: flex;
+
+  gap: 20px;
+
+  align-items: center;
+}
+
+/* ===========================================================
+   DETAILS SECTION
+=========================================================== */
+
+.cart-details {
+  flex: 1;
+}
+
+.cart-details h3 {
+  margin-bottom: 8px;
+}
+
+.cart-details p {
+  color: var(--text-light);
+
+  margin-bottom: 10px;
+}
+
+.cart-details h4 {
+  margin-bottom: 15px;
+}
+
+/* ===========================================================
+   ORDER SUMMARY
+=========================================================== */
+
+.order-summary {
+  background: white;
+
+  margin-top: 30px;
+
+  padding: 25px;
+
+  border-radius: 12px;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.order-summary h2 {
+  margin-bottom: 20px;
+}
+
+/* ===========================================================
+   SUMMARY ROWS
+=========================================================== */
+
+.summary-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+}
+
+.summary-row.total {
+  font-size: 20px;
+
+  font-weight: bold;
+
+  margin-top: 15px;
+}
+
+/* ===========================================================
+   CHECKOUT BUTTON
+=========================================================== */
+
+.checkout-btn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 15px;
+
+  background: var(--primary-color);
+
+  color: white;
+
+  border: none;
+
+  border-radius: 12px;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.checkout-btn:hover {
+  background: var(--primary-hover);
+
+  transform: translateY(-2px);
+}
+
+/* ===========================================================
+   EMPTY CART
+=========================================================== */
+
+.empty-cart {
+  text-align: center;
+
+  padding: 80px 20px;
+
+  color: var(--text-light);
+}
+
+.empty-cart h2 {
+  margin-bottom: 15px;
+
+  color: var(--text-dark);
+}
+
+.empty-cart p {
+  font-size: 18px;
+}
+
+/* ==========================================
+   EMPTY CART
+========================================== */
+
+.empty-cart {
+  text-align: center;
+
+  padding: 80px 20px;
+}
+
+.empty-cart h2 {
+  font-size: 36px;
+
+  margin-bottom: 15px;
+}
+
+.empty-cart p {
+  color: var(--text-light);
+
+  margin-bottom: 30px;
+
+  font-size: 18px;
+}
+
+/* Browse Menu button */
+
+.browse-menu-btn {
+  background: var(--secondary-color);
+
+  color: white;
+
+  border: none;
+
+  padding: 15px 35px;
+
+  border-radius: var(--radius-md);
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.browse-menu-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-md);
+}
+
+/* ===================================
+   Cart Page Header
+=================================== */
+
+.cart-header {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.cart-header h1 {
+  font-size: 42px;
+
+  margin-bottom: 10px;
+}
+
+.cart-header p {
+  color: var(--text-light);
+
+  font-size: 18px;
+}
