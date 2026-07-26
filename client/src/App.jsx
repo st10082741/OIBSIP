@@ -2,6 +2,13 @@
 import AppRoutes from "./routes/AppRoutes";
 // Import the Cart Provider
 import CartProvider from "./context/CartContext";
+
+// Import React Toastify styles
+import "react-toastify/dist/ReactToastify.css";
+
+// Import the Toast container
+import { ToastContainer } from "react-toastify";
+
 // The App component is the root component of our application.
 // It acts as a wrapper around the entire app.
 //
@@ -17,6 +24,20 @@ function App() {
     <CartProvider>
       {/* Display all application routes */}
       <AppRoutes />
+
+      {/* ==========================================
+    GLOBAL TOAST NOTIFICATIONS
+    Displays notifications throughout the app.
+========================================== */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="light"
+      />
     </CartProvider>
   );
 }

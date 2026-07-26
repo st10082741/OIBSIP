@@ -1,7 +1,8 @@
 // Import functions used to create and manage React Context
 //React Context is a way to share data across components without passing props down manually at every level.
 import { createContext, useState, useEffect } from "react";
-
+// Import toast notifications
+import { toast } from "react-toastify";
 // Create a new Context object.
 // Other components will use this to access the shopping cart.
 export const CartContext = createContext();
@@ -9,27 +10,29 @@ export const CartContext = createContext();
 // Create a Provider component.
 // This component will wrap our application and share the cart data.
 function CartProvider({ children }) {
-  // Store all cart items in state.
-  // It starts as an empty array because the cart is initially empty.
+  // Load any previously saved shopping cart from Local Storage.
+  // If no cart exists, start with an empty array.
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cart");
 
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
-  // Save the cart every time it changes
+  // Save the shopping cart to Local Storage every time it changes.
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   // Add a pizza to the shopping cart
-  // This function takes a pizza object as an argument and updates the cart state.
   function addToCart(pizza) {
+    // Show the notification once
+    toast.success(`🍕 ${pizza.name} added to cart!`);
+
     setCartItems((previousItems) => {
-      // Check if this pizza already exists
+      // Check if the pizza already exists
       const existingPizza = previousItems.find((item) => item.id === pizza.id);
 
-      // If it exists, increase its quantity
+      // If it already exists, increase the quantity
       if (existingPizza) {
         return previousItems.map((item) =>
           item.id === pizza.id
@@ -38,11 +41,10 @@ function CartProvider({ children }) {
         );
       }
 
-      // Otherwise add it with quantity 1
+      // Otherwise add a new pizza with quantity 1
       return [...previousItems, { ...pizza, quantity: 1 }];
     });
   }
-
   // Increase the quantity of a pizza
   function increaseQuantity(id) {
     setCartItems((previousItems) =>
@@ -65,6 +67,12 @@ function CartProvider({ children }) {
 
   // Remove a pizza completely from the cart
   function removeFromCart(id) {
+    const pizza = cartItems.find((item) => item.id === id);
+
+    if (pizza) {
+      toast.error(`🗑 ${pizza.name} removed from cart`);
+    }
+
     setCartItems((previousItems) =>
       previousItems.filter((item) => item.id !== id),
     );

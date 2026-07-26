@@ -1,0 +1,151 @@
+/* ===========================================================
+   MENU PAGE
+=========================================================== */
+
+.menu-page {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 0 30px;
+}
+
+/* ===========================================================
+   PAGE HEADER
+=========================================================== */
+
+.menu-page h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: var(--text-dark);
+}
+
+.menu-page p {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 35px;
+}
+
+/* ===========================================================
+   SEARCH + SORT TOOLBAR
+=========================================================== */
+
+.menu-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* ===========================================================
+   SEARCH BAR
+=========================================================== */
+
+.search-bar {
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: 0.3s;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+}
+
+/* ===========================================================
+   SORT DROPDOWN
+=========================================================== */
+
+.sort-dropdown {
+  width: 220px;
+  padding: 14px 18px;
+  font-size: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: white;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sort-dropdown:hover {
+  border-color: var(--primary-color);
+}
+
+.sort-dropdown:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+}
+
+/* ===========================================================
+   CATEGORY FILTER BUTTONS
+=========================================================== */
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.category-buttons button {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.category-buttons button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* ===========================================================
+   PIZZA GRID
+=========================================================== */
+
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* ===========================================================
+   RESPONSIVE DESIGN
+=========================================================== */
+
+@media (max-width: 768px) {
+  .menu-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar,
+  .sort-dropdown {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .category-buttons {
+    gap: 10px;
+  }
+
+  .category-buttons button {
+    flex: 1 1 45%;
+  }
+}

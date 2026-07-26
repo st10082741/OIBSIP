@@ -13,6 +13,7 @@ const pizzas = [
     image: pepperoni,
     rating: 4.9,
     popular: true,
+    category: "Beef",
   },
 
   {
@@ -23,6 +24,7 @@ const pizzas = [
     image: hawaiian,
     rating: 4.9,
     popular: false,
+    category: "Pork",
   },
 
   {
@@ -33,6 +35,7 @@ const pizzas = [
     image: bbqChicken,
     rating: 4.9,
     popular: true,
+    category: "Chicken",
   },
 ];
 
