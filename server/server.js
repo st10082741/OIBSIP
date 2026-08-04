@@ -70,6 +70,9 @@ const userRoutes = require("./routes/userRoutes");
 // ------------------------------------------------------------
 // Create the Express Application
 // ------------------------------------------------------------
+// Import administrator authentication routes.
+const adminRoutes = require("./routes/adminRoutes");
+// ------------------------------------------------------------
 
 // Create an Express application instance.
 //
@@ -125,6 +128,9 @@ app.use(express.json());
 // ------------------------------------------------------------
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+// Register administrator authentication routes.
+// This creates POST "http://localhost:5000/api/admin/login"
+app.use("/api/admin", adminRoutes);
 // ------------------------------------------------------------
 
 // ------------------------------------------------------------
