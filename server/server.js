@@ -73,7 +73,9 @@ const userRoutes = require("./routes/userRoutes");
 // Import administrator authentication routes.
 const adminRoutes = require("./routes/adminRoutes");
 // ------------------------------------------------------------
-
+// Import pizza routes.
+const pizzaRoutes = require("./routes/pizzaRoutes");
+// ------------------------------------------------------------
 // Create an Express application instance.
 //
 // Everything in our backend will be attached
@@ -132,7 +134,8 @@ app.use("/api/user", userRoutes);
 // This creates POST "http://localhost:5000/api/admin/login"
 app.use("/api/admin", adminRoutes);
 // ------------------------------------------------------------
-
+// Customer Pizza Routes/endpoints
+app.use("/api/pizzas", pizzaRoutes);
 // ------------------------------------------------------------
 // Health Check Route
 // ------------------------------------------------------------
