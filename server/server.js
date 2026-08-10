@@ -76,6 +76,10 @@ const adminRoutes = require("./routes/adminRoutes");
 // Import pizza routes.
 const pizzaRoutes = require("./routes/pizzaRoutes");
 // ------------------------------------------------------------
+
+// Import custom pizza builder routes.
+const builderRoutes = require("./routes/builderRoutes");
+// ------------------------------------------------------------
 // Create an Express application instance.
 //
 // Everything in our backend will be attached
@@ -136,6 +140,9 @@ app.use("/api/admin", adminRoutes);
 // ------------------------------------------------------------
 // Customer Pizza Routes/endpoints
 app.use("/api/pizzas", pizzaRoutes);
+// ------------------------------------------------------------
+// Register custom pizza builder routes.
+app.use("/api/builder", builderRoutes);
 // ------------------------------------------------------------
 // Health Check Route
 // ------------------------------------------------------------
