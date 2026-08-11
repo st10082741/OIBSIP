@@ -80,6 +80,11 @@ const pizzaRoutes = require("./routes/pizzaRoutes");
 // Import custom pizza builder routes.
 const builderRoutes = require("./routes/builderRoutes");
 // ------------------------------------------------------------
+
+// Import administrator inventory routes.
+const inventoryRoutes = require("./routes/inventoryRoutes");
+// ------------------------------------------------------------
+
 // Create an Express application instance.
 //
 // Everything in our backend will be attached
@@ -143,6 +148,9 @@ app.use("/api/pizzas", pizzaRoutes);
 // ------------------------------------------------------------
 // Register custom pizza builder routes.
 app.use("/api/builder", builderRoutes);
+// ------------------------------------------------------------
+// Register administrator inventory routes.
+app.use("/api/inventory", inventoryRoutes);
 // ------------------------------------------------------------
 // Health Check Route
 // ------------------------------------------------------------

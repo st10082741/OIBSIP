@@ -41,26 +41,68 @@ const pizzaBases = [
   {
     name: "Thin Crust",
     price: 0,
+
+    // Initial development stock.
+    stock: 100,
+
+    // Bases are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
+
     available: true,
   },
   {
     name: "Thick Crust",
     price: 10,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Bases are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Stuffed Crust",
     price: 20,
+    // Initial development stock.
+    stock: 100,
+
+    // Bases are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
     available: true,
   },
   {
     name: "Gluten Free",
     price: 15,
+    // Initial development stock.
+    stock: 100,
+
+    // Bases are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
     available: true,
   },
   {
     name: "Cheese Burst",
     price: 25,
+    // Initial development stock.
+    stock: 100,
+
+    // Bases are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
     available: true,
   },
 ];
@@ -75,26 +117,66 @@ const sauces = [
     name: "Tomato",
     price: 0,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Sauces are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "BBQ",
     price: 5,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Sauces are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Garlic",
     price: 5,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Sauces are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Pesto",
     price: 10,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Sauces are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Alfredo",
     price: 10,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Sauces are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
 ];
 
@@ -107,21 +189,45 @@ const cheeses = [
     name: "Mozzarella",
     price: 10,
     available: true,
+    // Initial development stock.
+    stock: 100,
+    // Cheeses are counted individually.
+    unit: "units",
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Cheddar",
     price: 12,
     available: true,
+    // Initial development stock.
+    stock: 100,
+    // Cheeses are counted individually.
+    unit: "units",
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Parmesan",
     price: 15,
     available: true,
+    // Initial development stock.
+    stock: 100,
+    // Cheeses are counted individually.
+    unit: "units",
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Feta",
     price: 15,
     available: true,
+    // Initial development stock.
+    stock: 100,
+    // Cheeses are counted individually.
+    unit: "units",
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
 ];
 
@@ -135,31 +241,79 @@ const vegetables = [
     name: "Mushrooms",
     price: 8,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Onions",
     price: 5,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Green Peppers",
     price: 6,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Olives",
     price: 8,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Tomatoes",
     price: 5,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
   {
     name: "Jalapenos",
     price: 7,
     available: true,
+    // Initial development stock.
+    stock: 100,
+
+    // Vegetables are counted individually.
+    unit: "units",
+
+    // Admin should later be warned at 20 or fewer.
+    lowStockThreshold: 20,
   },
 ];
 

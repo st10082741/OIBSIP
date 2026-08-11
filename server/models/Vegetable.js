@@ -31,6 +31,39 @@ const vegetableSchema = new mongoose.Schema(
       min: 0,
     },
 
+    // -----------------------------
+    // Current Stock
+    // -----------------------------
+
+    stock: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: 0,
+    },
+
+    // -----------------------------
+    // Unit of Measure
+    // -----------------------------
+
+    unit: {
+      type: String,
+      required: true,
+      default: "units",
+      trim: true,
+    },
+
+    // -----------------------------
+    // Low Stock Threshold
+    // -----------------------------
+
+    lowStockThreshold: {
+      type: Number,
+      required: true,
+      default: 20,
+      min: 0,
+    },
+
     // Allows the admin to temporarily disable this vegetable.
     available: {
       type: Boolean,

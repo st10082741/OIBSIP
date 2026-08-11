@@ -30,6 +30,44 @@ const sauceSchema = new mongoose.Schema(
       min: 0,
     },
 
+    // -----------------------------
+    // Current Stock
+    // -----------------------------
+
+    stock: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: 0,
+    },
+
+    // -----------------------------
+    // Unit of Measure
+    // -----------------------------
+
+    /*
+Sauces could later use litres, bottles or portions.
+For this project we begin with units for simple
+and predictable stock deduction.
+*/
+    unit: {
+      type: String,
+      required: true,
+      default: "units",
+      trim: true,
+    },
+
+    // -----------------------------
+    // Low Stock Threshold
+    // -----------------------------
+
+    lowStockThreshold: {
+      type: Number,
+      required: true,
+      default: 20,
+      min: 0,
+    },
+
     // Allows the admin to enable or disable the sauce.
     available: {
       type: Boolean,

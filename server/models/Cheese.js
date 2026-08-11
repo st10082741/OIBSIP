@@ -30,6 +30,39 @@ const cheeseSchema = new mongoose.Schema(
       min: 0,
     },
 
+    // -----------------------------
+    // Current Stock
+    // -----------------------------
+
+    stock: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: 0,
+    },
+
+    // -----------------------------
+    // Unit of Measure
+    // -----------------------------
+
+    unit: {
+      type: String,
+      required: true,
+      default: "units",
+      trim: true,
+    },
+
+    // -----------------------------
+    // Low Stock Threshold
+    // -----------------------------
+
+    lowStockThreshold: {
+      type: Number,
+      required: true,
+      default: 20,
+      min: 0,
+    },
+
     // Allows the option to be hidden without deleting it.
     available: {
       type: Boolean,
