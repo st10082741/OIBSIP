@@ -32,6 +32,10 @@ const pizzaSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+
+      // Prevent two pizzas from having the exact same name.
+      unique: true,
+
       trim: true,
     },
 
