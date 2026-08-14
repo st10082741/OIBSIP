@@ -15,6 +15,8 @@ Responsibilities:
 • Control featured status
 • Control popular status
 • Control availability
+• Manage catalog pizza inventory recipes
+• Upload / replace pizza images
 
 Customer-facing pizza requests remain inside
 pizzaController.js.
@@ -113,6 +115,22 @@ const createPizza = async (req, res) => {
       description,
       price,
       category,
+
+      /*
+      Recipe maps a catalog pizza to the inventory
+      ingredients consumed when the pizza is ordered.
+
+      Example:
+
+      recipe: {
+        base: "...",
+        sauce: "...",
+        cheese: "...",
+        vegetables: ["...", "..."]
+      }
+      */
+      recipe,
+
       image,
       rating,
       featured,
@@ -163,13 +181,35 @@ const createPizza = async (req, res) => {
       });
     }
 
+    // ---------------------------------------------------------
+    // CREATE PIZZA DOCUMENT
+    // ---------------------------------------------------------
+
     const pizza = await Pizza.create({
       name,
       description,
       price,
       category,
 
-      // Image upload will be implemented in Batch 2.
+      /*
+      If the admin does not provide a recipe yet,
+      initialise a safe empty recipe.
+
+      This allows the pizza to exist in the menu while
+      its inventory mapping can be configured later.
+      */
+      recipe: recipe ?? {
+        base: null,
+        sauce: null,
+        cheese: null,
+        vegetables: [],
+      },
+
+      /*
+      The image path may be empty when the pizza is first
+      created. The dedicated image-upload endpoint can
+      populate it later.
+      */
       image: image ?? "",
 
       rating: rating ?? 0,
@@ -210,12 +250,16 @@ const updatePizza = async (req, res) => {
     /*
     Only these fields may be changed through
     the administrator pizza-management API.
+
+    Recipe is included so the administrator can manage
+    inventory mappings without changing backend code.
     */
     const allowedFields = [
       "name",
       "description",
       "price",
       "category",
+      "recipe",
       "image",
       "rating",
       "featured",
@@ -279,6 +323,12 @@ const updatePizza = async (req, res) => {
       }
     }
 
+    /*
+    Update the pizza and return the updated document.
+
+    runValidators ensures Mongoose schema validation still
+    applies to the fields being changed.
+    */
     const pizza = await Pizza.findByIdAndUpdate(id, updates, {
       returnDocument: "after",
       runValidators: true,
@@ -388,6 +438,7 @@ const uploadPizzaImage = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Pizza image uploaded successfully.",
+
       pizza: {
         id: pizza._id,
         name: pizza.name,
@@ -403,7 +454,10 @@ const uploadPizzaImage = async (req, res) => {
   }
 };
 
-// Export administrator pizza functions.
+// =============================================================
+// EXPORT ADMINISTRATOR PIZZA FUNCTIONS
+// =============================================================
+
 module.exports = {
   getAllAdminPizzas,
   getAdminPizzaById,

@@ -67,6 +67,47 @@ const pizzaSchema = new mongoose.Schema(
     },
 
     // -----------------------------
+    // Inventory Recipe
+    // -----------------------------
+
+    /*
+Maps a catalog pizza to the inventory ingredients
+consumed whenever the pizza is successfully ordered.
+
+This allows regular menu pizzas to use the same
+inventory system as custom-built pizzas.
+
+The recipe stores MongoDB references rather than
+hardcoded ingredient names.
+*/
+
+    recipe: {
+      base: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PizzaBase",
+        default: null,
+      },
+
+      sauce: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Sauce",
+        default: null,
+      },
+
+      cheese: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Cheese",
+        default: null,
+      },
+
+      vegetables: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Vegetable",
+        },
+      ],
+    },
+    // -----------------------------
     // Pizza Image
     // -----------------------------
     image: {

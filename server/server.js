@@ -97,6 +97,18 @@ const inventoryRoutes = require("./routes/inventoryRoutes");
 // Administrator pizza-management routes.
 const adminPizzaRoutes = require("./routes/adminPizzaRoutes");
 
+// Import customer shopping-cart routes.
+const cartRoutes = require("./routes/cartRoutes");
+
+// Import customer checkout routes.
+const checkoutRoutes = require("./routes/checkoutRoutes");
+
+// Import customer order routes.
+const orderRoutes = require("./routes/orderRoutes");
+//------------------------------------------------------------
+
+// Import customer payment routes.
+const paymentRoutes = require("./routes/paymentRoutes");
 // ------------------------------------------------------------
 // Create Express Application
 // ------------------------------------------------------------
@@ -220,6 +232,17 @@ app.use("/api/builder", builderRoutes);
 // ------------------------------------------------------------
 
 app.use("/api/inventory", inventoryRoutes);
+
+// Authenticated customer shopping-cart endpoints.
+app.use("/api/cart", cartRoutes);
+// Authenticated customer checkout endpoints.
+app.use("/api/checkout", checkoutRoutes);
+
+// Authenticated customer order endpoints.
+app.use("/api/orders", orderRoutes);
+
+// Authenticated customer payment endpoints.
+app.use("/api/payments", paymentRoutes);
 
 // ------------------------------------------------------------
 // Register Administrator Pizza Management Routes
