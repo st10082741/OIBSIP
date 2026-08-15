@@ -395,6 +395,68 @@ const deleteInventoryItem = async (req, res) => {
   }
 };
 
+// =============================================================
+// TEST LOW-STOCK DETECTION
+// =============================================================
+
+const testLowStockDetection = async (req, res) => {
+  try {
+    const { getLowStockItems } = require("../services/lowStockService");
+
+    const lowStockItems = await getLowStockItems();
+
+    return res.status(200).json({
+      success: true,
+      count: lowStockItems.length,
+      lowStockItems,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to check low-stock inventory.",
+      error: error.message,
+    });
+  }
+};
+
+// =============================================================
+// TEST LOW-STOCK EMAIL
+// =============================================================
+
+const testLowStockEmail = async (req, res) => {
+  try {
+    const { getLowStockItems } = require("../services/lowStockService");
+
+    const { sendLowStockEmail } = require("../services/lowStockEmailService");
+
+    const lowStockItems = await getLowStockItems();
+
+    if (lowStockItems.length === 0) {
+      return res.status(200).json({
+        success: true,
+        emailSent: false,
+        message: "No low-stock items detected. No email was sent.",
+      });
+    }
+
+    const result = await sendLowStockEmail(lowStockItems);
+
+    return res.status(200).json({
+      success: true,
+      emailSent: result.sent,
+      count: lowStockItems.length,
+      message: "Low-stock notification email sent successfully.",
+      lowStockItems,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send low-stock notification email.",
+      error: error.message,
+    });
+  }
+};
+
 // Export inventory controller functions.
 module.exports = {
   getInventoryDashboard,
@@ -402,4 +464,6 @@ module.exports = {
   updateInventoryItem,
   adjustStock,
   deleteInventoryItem,
+  testLowStockDetection,
+  testLowStockEmail,
 };

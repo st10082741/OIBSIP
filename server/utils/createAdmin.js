@@ -1,14 +1,15 @@
 /*
 ==============================================================
-                CREATE INITIAL ADMIN
+                    CREATE INITIAL ADMIN
 ==============================================================
 
-This development utility creates the first administrator.
+This utility creates the application's initial administrator.
 
-Why it exists:
-• Public admin registration is intentionally unavailable.
-• The password is hashed before storage.
-• Running it again will not create a duplicate admin.
+Security:
+• Public admin registration is unavailable.
+• Credentials are loaded from environment variables.
+• The password is bcrypt-hashed before storage.
+• Existing administrators are NOT automatically modified.
 
 Run:
 node utils/createAdmin.js
@@ -16,56 +17,80 @@ node utils/createAdmin.js
 ==============================================================
 */
 
-// Load environment variables before using the database connection.
 require("dotenv").config();
 
-// Import bcrypt for securely hashing the admin password.
 const bcrypt = require("bcrypt");
 
-// Import the MongoDB connection function.
 const connectDB = require("../config/db");
 
-// Import the Admin model.
 const Admin = require("../models/Admin");
 
-// Create the initial administrator.
+// =============================================================
+// CREATE INITIAL ADMIN
+// =============================================================
+
 const createAdmin = async () => {
   try {
-    // Connect this standalone script to MongoDB Atlas.
     await connectDB();
 
-    // Change these development details before running the script.
-    const adminDetails = {
-      name: "Victor Sumbo",
-      email: "bachisumbo@gmail.com",
-      password: "AdminPassword1997",
-    };
+    // ---------------------------------------------------------
+    // Validate environment variables.
+    // ---------------------------------------------------------
 
-    // Prevent duplicate administrator accounts.
+    const adminEmail = process.env.ADMIN_SEED_EMAIL;
+
+    const adminPassword = process.env.ADMIN_SEED_PASSWORD;
+
+    if (!adminEmail || !adminPassword) {
+      console.error(
+        "❌ ADMIN_SEED_EMAIL and ADMIN_SEED_PASSWORD must be defined in .env.",
+      );
+
+      process.exit(1);
+    }
+
+    // ---------------------------------------------------------
+    // Normalise admin email.
+    // ---------------------------------------------------------
+
+    const normalizedEmail = adminEmail.trim().toLowerCase();
+
+    // ---------------------------------------------------------
+    // Prevent duplicate administrators.
+    // ---------------------------------------------------------
+
     const existingAdmin = await Admin.findOne({
-      email: adminDetails.email,
+      email: normalizedEmail,
     });
 
     if (existingAdmin) {
-      console.log("ℹ️ Admin account already exists.");
+      console.log("ℹ️ Admin account already exists. No changes were made.");
+
       process.exit(0);
     }
+    // ---------------------------------------------------------
+    // Hash password before storing it.
+    // ---------------------------------------------------------
 
-    // Hash the plain password before saving it.
-    const hashedPassword = await bcrypt.hash(adminDetails.password, 10);
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
-    // Save the administrator in the separate admins collection.
+    // ---------------------------------------------------------
+    // Create administrator.
+    // ---------------------------------------------------------
+
     await Admin.create({
-      name: adminDetails.name,
-      email: adminDetails.email,
+      name: "Victor Sumbo",
+      email: normalizedEmail,
       password: hashedPassword,
       role: "admin",
     });
 
     console.log("✅ Initial admin account created successfully.");
+
     process.exit(0);
   } catch (error) {
     console.error("❌ Admin creation failed:", error.message);
+
     process.exit(1);
   }
 };

@@ -36,6 +36,8 @@ const {
   updateInventoryItem,
   adjustStock,
   deleteInventoryItem,
+  testLowStockDetection,
+  testLowStockEmail,
 } = require("../controllers/inventoryController");
 
 // =============================================================
@@ -86,6 +88,20 @@ router.get("/", getInventoryDashboard);
 // =============================================================
 // ADD INVENTORY ITEM
 // =============================================================
+
+// =============================================================
+// TEST LOW-STOCK DETECTION
+// =============================================================
+
+/*
+GET /api/inventory/test-low-stock
+/*
+Returns a list of inventory items that are low in stock.
+*/
+
+router.get("/test-low-stock", testLowStockDetection);
+
+router.post("/test-low-stock-email", testLowStockEmail);
 
 /*
 POST /api/inventory/:category
