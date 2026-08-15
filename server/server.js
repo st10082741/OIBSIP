@@ -110,6 +110,10 @@ const orderRoutes = require("./routes/orderRoutes");
 // Import customer payment routes.
 const paymentRoutes = require("./routes/paymentRoutes");
 // ------------------------------------------------------------
+// Import administrator order management routes.
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
+
+//
 // Create Express Application
 // ------------------------------------------------------------
 
@@ -244,6 +248,8 @@ app.use("/api/orders", orderRoutes);
 // Authenticated customer payment endpoints.
 app.use("/api/payments", paymentRoutes);
 
+//
+
 // ------------------------------------------------------------
 // Register Administrator Pizza Management Routes
 // ------------------------------------------------------------
@@ -263,7 +269,8 @@ this route group.
 */
 
 app.use("/api/admin/pizzas", adminPizzaRoutes);
-
+// Admin order management routes.
+app.use("/api/admin/orders", adminOrderRoutes);
 // ------------------------------------------------------------
 // Health Check Route
 // ------------------------------------------------------------

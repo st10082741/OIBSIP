@@ -17,7 +17,11 @@ const express = require("express");
 
 const router = express.Router();
 
-const { createOrder, getMyOrders } = require("../controllers/orderController");
+const {
+  createOrder,
+  getMyOrders,
+  getCurrentOrder,
+} = require("../controllers/orderController");
 
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -26,6 +30,9 @@ router.use(authMiddleware);
 
 // Create a new order from the authenticated customer's cart.
 router.post("/", createOrder);
+
+// Return the authenticated customer's current order.
+router.get("/current", getCurrentOrder);
 
 // Return the authenticated customer's orders.
 router.get("/", getMyOrders);

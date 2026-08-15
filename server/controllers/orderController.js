@@ -333,8 +333,50 @@ const getMyOrders = async (req, res) => {
     });
   }
 };
+// =============================================================
+// GET CURRENT CUSTOMER ORDER
+// =============================================================
+
+const getCurrentOrder = async (req, res) => {
+  try {
+    /*
+    Find the most recent order belonging to the
+    authenticated customer.
+
+    The frontend dashboard can use this endpoint to display
+    the customer's latest order and its current status.
+    */
+
+    const order = await Order.findOne({
+      user: req.user.id,
+    }).sort({
+      createdAt: -1,
+    });
+
+    if (!order) {
+      return res.status(200).json({
+        success: true,
+        message: "No current order found.",
+        order: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Current order loaded successfully.",
+      order,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to load current order.",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   createOrder,
   getMyOrders,
+  getCurrentOrder,
 };
