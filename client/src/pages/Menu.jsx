@@ -1,128 +1,198 @@
-// Import React state
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-// Import pizza data
-import pizzas from "../data/pizzas";
-
-// Import Pizza Card
 import PizzaCard from "../components/PizzaCard/PizzaCard";
 
-// Import page styling
+import { getPizzas } from "../services/pizzaService";
+
 import "./Menu.css";
 
-// Menu Page
 function Menu() {
-  // Stores the search text entered by the user
+  const [pizzas, setPizzas] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
   const [search, setSearch] = useState("");
 
-  // Stores the selected pizza category
   const [category, setCategory] = useState("All");
 
-  // Stores the selected sorting option
   const [sortOption, setSortOption] = useState("default");
 
-  // Filter pizzas by search text and category
-  const filteredPizzas = pizzas.filter((pizza) => {
-    const matchesSearch = pizza.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
+  // ===========================================================
+  // LOAD REAL MONGODB PIZZAS
+  // ===========================================================
 
-    const matchesCategory = category === "All" || pizza.category === category;
+  useEffect(() => {
+    const loadPizzas = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-    return matchesSearch && matchesCategory;
-  });
+        const result = await getPizzas();
 
-  // Create a copy before sorting
-  const sortedPizzas = [...filteredPizzas];
+        setPizzas(result.pizzas || []);
+      } catch (requestError) {
+        setError(
+          requestError.response?.data?.message || "We could not load the menu.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Sort pizzas based on selected option
-  switch (sortOption) {
-    case "price-low":
-      sortedPizzas.sort((a, b) => a.price - b.price);
-      break;
+    loadPizzas();
+  }, []);
 
-    case "price-high":
-      sortedPizzas.sort((a, b) => b.price - a.price);
-      break;
+  // ===========================================================
+  // CATEGORIES
+  // ===========================================================
 
-    case "name-az":
-      sortedPizzas.sort((a, b) => a.name.localeCompare(b.name));
-      break;
+  const categories = useMemo(() => {
+    const databaseCategories = pizzas
+      .map((pizza) => pizza.category)
+      .filter(Boolean);
 
-    case "name-za":
-      sortedPizzas.sort((a, b) => b.name.localeCompare(a.name));
-      break;
+    return ["All", ...new Set(databaseCategories)];
+  }, [pizzas]);
 
-    case "rating":
-      sortedPizzas.sort((a, b) => b.rating - a.rating);
-      break;
+  // ===========================================================
+  // FILTER + SORT
+  // ===========================================================
 
-    default:
-      break;
-  }
+  const visiblePizzas = useMemo(() => {
+    const filtered = pizzas.filter((pizza) => {
+      const matchesSearch = pizza.name
+        .toLowerCase()
+        .includes(search.trim().toLowerCase());
+
+      const matchesCategory = category === "All" || pizza.category === category;
+
+      return matchesSearch && matchesCategory;
+    });
+
+    const sorted = [...filtered];
+
+    switch (sortOption) {
+      case "price-low":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+
+      case "price-high":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+
+      case "name-az":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+
+      case "name-za":
+        sorted.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+
+      case "rating":
+        sorted.sort((a, b) => b.rating - a.rating);
+        break;
+
+      default:
+        break;
+    }
+
+    return sorted;
+  }, [pizzas, search, category, sortOption]);
 
   return (
     <div className="menu-page">
-      {/* ==========================
-          PAGE HEADER
-      ========================== */}
-      <h1>Pizza Menu</h1>
+      <section className="menu-hero">
+        <span className="menu-eyebrow">Our Menu</span>
 
-      <p>Choose from our delicious selection.</p>
+        <h1>Find your next favourite pizza.</h1>
 
-      {/* ==========================
-    SEARCH + SORT TOOLBAR
-========================== */}
-      <div className="menu-toolbar">
-        {/* Search Bar */}
-        <input
-          type="text"
-          placeholder="Search pizzas..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-bar"
-        />
+        <p>Freshly prepared favourites powered by our live kitchen menu.</p>
+      </section>
 
-        {/* Sort Dropdown */}
-        <select
-          className="sort-dropdown"
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-        >
-          <option value="default">Sort By</option>
-          <option value="price-low">Price: Low → High</option>
-          <option value="price-high">Price: High → Low</option>
-          <option value="name-az">Name: A → Z</option>
-          <option value="name-za">Name: Z → A</option>
-          <option value="rating">Highest Rated</option>
-        </select>
-      </div>
+      <section className="menu-control-card">
+        <div className="menu-toolbar">
+          <input
+            type="search"
+            placeholder="Search pizzas..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            className="search-bar"
+          />
 
-      {/* ==========================
-          CATEGORY FILTERS
-      ========================== */}
-      <div className="category-buttons">
-        <button onClick={() => setCategory("All")}>All</button>
+          <select
+            className="sort-dropdown"
+            value={sortOption}
+            onChange={(event) => setSortOption(event.target.value)}
+          >
+            <option value="default">Sort menu</option>
 
-        <button onClick={() => setCategory("Beef")}>Beef</button>
+            <option value="price-low">Price: Low → High</option>
 
-        <button onClick={() => setCategory("Pork")}>Pork</button>
+            <option value="price-high">Price: High → Low</option>
 
-        <button onClick={() => setCategory("Chicken")}>Chicken</button>
+            <option value="name-az">Name: A → Z</option>
 
-        <button onClick={() => setCategory("Vegetarian")}>Vegetarian</button>
+            <option value="name-za">Name: Z → A</option>
 
-        <button onClick={() => setCategory("Seafood")}>Seafood</button>
-      </div>
+            <option value="rating">Highest Rated</option>
+          </select>
+        </div>
 
-      {/* ==========================
-          PIZZA GRID
-      ========================== */}
-      <div className="pizza-grid">
-        {sortedPizzas.map((pizza) => (
-          <PizzaCard key={pizza.id} {...pizza} />
-        ))}
-      </div>
+        <div className="category-buttons">
+          {categories.map((item) => (
+            <button
+              type="button"
+              key={item}
+              className={category === item ? "active" : ""}
+              onClick={() => setCategory(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {loading && (
+        <div className="menu-state">
+          <div className="menu-loader" />
+          <h3>Preparing the menu...</h3>
+        </div>
+      )}
+
+      {!loading && error && (
+        <div className="menu-state error">
+          <span>🍕</span>
+          <h3>Menu unavailable</h3>
+          <p>{error}</p>
+        </div>
+      )}
+
+      {!loading && !error && visiblePizzas.length === 0 && (
+        <div className="menu-state">
+          <span>🔎</span>
+          <h3>No pizzas found</h3>
+          <p>Try another search or category.</p>
+        </div>
+      )}
+
+      {!loading && !error && visiblePizzas.length > 0 && (
+        <>
+          <div className="menu-results">
+            <span>
+              {visiblePizzas.length} pizza
+              {visiblePizzas.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+
+          <div className="pizza-grid">
+            {visiblePizzas.map((pizza) => (
+              <PizzaCard key={pizza._id} {...pizza} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

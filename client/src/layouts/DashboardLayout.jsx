@@ -6,6 +6,10 @@ import Navbar from "../components/Navbar/Navbar";
 
 // import footer component for consistent footer across pages
 import Footer from "../components/Footer/Footer";
+
+// Import the CSS file for styling the dashboard layout
+import "./DashboardLayout.css";
+
 // Shared layout for all protected pages
 function DashboardLayout() {
   return (

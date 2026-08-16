@@ -1,0 +1,468 @@
+.admin-inventory-page {
+  min-height: 100%;
+  padding: 55px max(25px, 5vw) 90px;
+  background: #f7f7f8;
+}
+
+.inventory-header {
+  max-width: 1400px;
+  margin: 0 auto 32px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 25px;
+}
+
+.inventory-eyebrow {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #f97316;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.inventory-header h1 {
+  margin-bottom: 10px;
+
+  font-size: clamp(38px, 5vw, 57px);
+
+  letter-spacing: -2px;
+}
+
+.inventory-header p {
+  max-width: 650px;
+
+  color: #777;
+
+  line-height: 1.6;
+}
+
+.inventory-header button {
+  padding: 11px 16px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 11px;
+
+  background: white;
+
+  font-weight: 800;
+}
+
+.inventory-summary {
+  max-width: 1400px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+
+  margin: 0 auto 35px;
+}
+
+.inventory-summary div {
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  border: 1px solid #ececec;
+}
+
+.inventory-summary span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #888;
+
+  font-size: 12px;
+}
+
+.inventory-summary strong {
+  font-size: 27px;
+}
+
+.inventory-summary .danger {
+  color: #d13b3b;
+}
+
+/* ===========================================================
+   CATEGORY
+=========================================================== */
+
+.inventory-section {
+  max-width: 1400px;
+
+  margin: 0 auto 45px;
+}
+
+.inventory-section-heading {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  margin-bottom: 16px;
+}
+
+.inventory-section-heading span {
+  color: #f97316;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.inventory-section-heading h2 {
+  margin-top: 5px;
+
+  font-size: 27px;
+}
+
+.inventory-section-heading > strong {
+  color: #888;
+
+  font-size: 13px;
+}
+
+.inventory-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 17px;
+}
+
+/* ===========================================================
+   CARD
+=========================================================== */
+
+.inventory-card {
+  padding: 21px;
+
+  border: 1px solid #e8e8e8;
+
+  border-radius: 19px;
+
+  background: white;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.inventory-card.low-stock {
+  border-color: #edb1a8;
+
+  background: linear-gradient(180deg, #fff, #fff7f5);
+}
+
+.inventory-card-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.inventory-card-top h3 {
+  margin-bottom: 4px;
+}
+
+.inventory-card-top span {
+  color: #888;
+
+  font-size: 11px;
+}
+
+.low-stock-badge {
+  align-self: flex-start;
+
+  padding: 6px 9px;
+
+  border-radius: 50px;
+
+  background: #fff0ee;
+
+  color: #bd3939;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+.inventory-stock {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 7px;
+
+  margin: 24px 0;
+}
+
+.inventory-stock strong {
+  color: #f97316;
+
+  font-size: 42px;
+}
+
+.inventory-stock span {
+  color: #888;
+}
+
+/* DETAILS */
+
+.inventory-details {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+.inventory-details div {
+  padding: 11px;
+
+  border-radius: 10px;
+
+  background: #f8f8f8;
+}
+
+.inventory-details span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #999;
+
+  font-size: 10px;
+}
+
+.inventory-details strong {
+  font-size: 12px;
+}
+
+/* ACTIONS */
+
+.inventory-actions {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 7px;
+}
+
+.inventory-actions button {
+  padding: 10px;
+
+  border-radius: 9px;
+
+  background: #fff3eb;
+
+  color: #d95622;
+
+  font-weight: 900;
+}
+
+.inventory-actions button:hover {
+  background: #f97316;
+
+  color: white;
+}
+
+.inventory-availability {
+  width: 100%;
+
+  margin-top: 10px;
+
+  padding: 10px;
+
+  border-radius: 9px;
+
+  background: #fff0f0;
+
+  color: #b53737;
+
+  font-weight: 800;
+}
+
+.inventory-availability.enable {
+  background: #eaf8ef;
+
+  color: #27844e;
+}
+
+.inventory-error {
+  max-width: 1400px;
+
+  margin: 0 auto 20px;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #fff0f0;
+
+  color: #aa3030;
+}
+
+/* STATES */
+
+.inventory-state {
+  min-height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+}
+
+.inventory-spinner {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid #eee;
+
+  border-top-color: #f97316;
+
+  border-radius: 50%;
+
+  animation: inventory-spin 0.8s linear infinite;
+}
+
+@keyframes inventory-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 850px) {
+  .inventory-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-inventory-page {
+    padding: 35px 15px 70px;
+  }
+
+  .inventory-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .inventory-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================================================
+   INVENTORY SETTINGS
+=========================================================== */
+
+.inventory-settings {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 9px;
+
+  margin-top: 17px;
+}
+
+.inventory-setting-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.inventory-setting-field label {
+  color: #777;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.inventory-setting-field input {
+  width: 100%;
+
+  padding: 10px 11px;
+
+  border: 1px solid #dedede;
+
+  border-radius: 9px;
+
+  background: #fafafa;
+
+  font: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.inventory-setting-field input:focus {
+  outline: none;
+
+  border-color: #f97316;
+
+  background: white;
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+.inventory-save-settings {
+  width: 100%;
+
+  margin-top: 9px;
+
+  padding: 10px;
+
+  border-radius: 9px;
+
+  background: #2d1912;
+
+  color: white;
+
+  font-weight: 800;
+}
+
+.inventory-save-settings:hover:not(:disabled) {
+  background: #4a281b;
+}
+
+.inventory-save-settings:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+@media (max-width: 450px) {
+  .inventory-settings {
+    grid-template-columns: 1fr;
+  }
+}

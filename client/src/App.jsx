@@ -1,45 +1,45 @@
-// Import the application's routing configuration
+// Import application routing.
 import AppRoutes from "./routes/AppRoutes";
-// Import the Cart Provider
+
+// Global customer/admin authentication.
+import AuthProvider from "./context/AuthContext";
+
+// Shopping cart provider.
 import CartProvider from "./context/CartContext";
 
-// Import React Toastify styles
+// Toast notifications.
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Import the Toast container
-import { ToastContainer } from "react-toastify";
+/*
+==============================================================
+                        ROOT APP
+==============================================================
 
-// The App component is the root component of our application.
-// It acts as a wrapper around the entire app.
-//
-// As the project grows, this is where we can add:
-// - Authentication providers
-// - Theme providers
-// - Shopping cart providers
-// - Notifications
-// - Other global features
+Global providers are placed here so authentication,
+cart functionality and notifications are available
+throughout the application.
+==============================================================
+*/
+
 function App() {
   return (
-    // Share the shopping cart with the entire application
-    <CartProvider>
-      {/* Display all application routes */}
-      <AppRoutes />
+    <AuthProvider>
+      <CartProvider>
+        <AppRoutes />
 
-      {/* ==========================================
-    GLOBAL TOAST NOTIFICATIONS
-    Displays notifications throughout the app.
-========================================== */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2500}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        theme="light"
-      />
-    </CartProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          theme="light"
+        />
+      </CartProvider>
+    </AuthProvider>
   );
 }
-// Make the App component available to other files
+
 export default App;

@@ -1,58 +1,86 @@
-// Import the reusable Button component
 import Button from "../Button/Button";
 
-// Import the component styles
 import "./PizzaCard.css";
 
-// Import React's useContext hook
 import { useContext } from "react";
 
-// Import the shopping cart context
 import { CartContext } from "../../context/CartContext";
 
-// Reusable card used to display a pizza
-function PizzaCard({ id, image, name, description, price, rating, popular }) {
-  // Access the shared shopping cart
+import { getImageUrl } from "../../utils/imageUrl";
+
+function PizzaCard({
+  _id,
+  id,
+  image,
+  name,
+  description,
+  price,
+  rating,
+  popular,
+  category,
+  available = true,
+}) {
   const { addToCart } = useContext(CartContext);
+
+  const pizzaId = _id || id;
+
+  const imageUrl = getImageUrl(image);
+
   return (
-    <div className="pizza-card">
-      {/* Pizza image container */}
+    <article className="pizza-card">
       <div className="pizza-image-container">
-        {/* Show badge only if pizza is popular */}
         {popular && <span className="popular-badge">🔥 Popular</span>}
-        {/* Favourite button */}
-        <button className="favorite-btn">❤️</button>
-        {/* Pizza image */}
-        <img src={image} alt={name} className="pizza-image" />
+
+        <span className="pizza-category-badge">{category}</span>
+
+        {imageUrl ? (
+          <img src={imageUrl} alt={name} className="pizza-image" />
+        ) : (
+          <div className="pizza-image-placeholder">
+            <span>🍕</span>
+
+            <small>Freshly prepared</small>
+          </div>
+        )}
       </div>
 
-      {/* Pizza information */}
       <div className="pizza-content">
-        <h3>{name}</h3>
-        <p className="rating">⭐ {rating}</p>
-        <p>{description}</p>
+        <div className="pizza-title-row">
+          <h3>{name}</h3>
 
-        {/* Card footer with price and add to cart button */}
+          <span className="rating">⭐ {rating || "New"}</span>
+        </div>
+
+        <p className="pizza-description">{description}</p>
+
         <div className="card-footer">
-          <h4>R {price}</h4>
+          <div>
+            <span className="price-label">From</span>
+
+            <h4>R {Number(price).toFixed(2)}</h4>
+          </div>
 
           <Button
-            text="Add to Cart"
+            text={available ? "Add to Cart" : "Unavailable"}
+            disabled={!available}
             onClick={() =>
               addToCart({
-                id,
+                id: pizzaId,
+                _id: pizzaId,
                 image,
                 name,
                 description,
                 price,
                 rating,
                 popular,
+                category,
+                available,
               })
             }
           />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 

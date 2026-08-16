@@ -1,56 +1,103 @@
-// Import the routing components from React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Import the layouts
 import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
-// Import all application pages
+// ============================================================
+// ROUTE SECURITY
+// ============================================================
+
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import AdminRoute from "../components/AdminRoute/AdminRoute";
+
+// ============================================================
+// AUTHENTICATION PAGES
+// ============================================================
+
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
+import AdminLogin from "../pages/AdminLogin";
+
+// ============================================================
+// CUSTOMER PAGES
+// ============================================================
 
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Orders from "../pages/Orders";
-import Profile from "../pages/Profile";
-import Settings from "../pages/Settings";
 import NotFound from "../pages/NotFound";
+import PizzaBuilder from "../pages/PizzaBuilder";
+import Payment from "../pages/Payment";
 
-// This component contains every route in the application
+// ============================================================
+// ADMIN PAGES
+// ============================================================
+
+import AdminDashboard from "../pages/AdminDashboard";
+import AdminInventory from "../pages/AdminInventory";
+import AdminPizzas from "../pages/AdminPizzas";
+// ============================================================
+// ERROR PAGE
+// ============================================================
+
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Authentication pages */}
+        {/* ==================================================
+            PUBLIC AUTHENTICATION
+        ================================================== */}
+
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
-
           <Route path="/register" element={<Register />} />
 
           <Route path="/forgot-password" element={<ForgotPassword />} />
+
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+          <Route path="/admin/login" element={<AdminLogin />} />
         </Route>
 
-        {/* Main application pages */}
-        <Route element={<DashboardLayout />}>
-          <Route path="/" element={<Home />} />
+        {/* ==================================================
+            PROTECTED CUSTOMER APPLICATION
+        ================================================== */}
 
-          <Route path="/menu" element={<Menu />} />
-
-          <Route path="/cart" element={<Cart />} />
-
-          <Route path="/checkout" element={<Checkout />} />
-
-          <Route path="/orders" element={<Orders />} />
-
-          <Route path="/profile" element={<Profile />} />
-
-          <Route path="/settings" element={<Settings />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/builder" element={<PizzaBuilder />} />
+            <Route path="/payment/:orderId" element={<Payment />} />
+          </Route>
         </Route>
 
-        {/* If no route matches, show the 404 page */}
+        {/* ==================================================
+            PROTECTED ADMIN APPLICATION
+        ================================================== */}
+
+        <Route element={<AdminRoute />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+
+            <Route path="/admin/inventory" element={<AdminInventory />} />
+
+            <Route path="/admin/pizzas" element={<AdminPizzas />} />
+          </Route>
+        </Route>
+
+        {/* ==================================================
+            404
+        ================================================== */}
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

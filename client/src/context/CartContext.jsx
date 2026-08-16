@@ -1,114 +1,264 @@
-// Import functions used to create and manage React Context
-//React Context is a way to share data across components without passing props down manually at every level.
-import { createContext, useState, useEffect } from "react";
-// Import toast notifications
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 import { toast } from "react-toastify";
-// Create a new Context object.
-// Other components will use this to access the shopping cart.
-export const CartContext = createContext();
 
-// Create a Provider component.
-// This component will wrap our application and share the cart data.
+import { useAuth } from "./AuthContext";
+
+import {
+  getCart,
+  addCatalogPizza,
+  addCustomPizza as addCustomPizzaRequest,
+  updateCartItem,
+  removeCartItem,
+  clearCustomerCart,
+} from "../services/cartService";
+
+export const CartContext = createContext(null);
+
 function CartProvider({ children }) {
-  // Load any previously saved shopping cart from Local Storage.
-  // If no cart exists, start with an empty array.
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
+  const { isAuthenticated } = useAuth();
 
-    return savedCart ? JSON.parse(savedCart) : [];
+  const [cart, setCart] = useState({
+    id: null,
+    items: [],
+    totalQuantity: 0,
+    total: 0,
   });
 
-  // Save the shopping cart to Local Storage every time it changes.
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+  const [loading, setLoading] = useState(false);
 
-  // Add a pizza to the shopping cart
-  function addToCart(pizza) {
-    // Show the notification once
-    toast.success(`🍕 ${pizza.name} added to cart!`);
+  // ===========================================================
+  // RESET LOCAL CART STATE
+  // ===========================================================
 
-    setCartItems((previousItems) => {
-      // Check if the pizza already exists
-      const existingPizza = previousItems.find((item) => item.id === pizza.id);
-
-      // If it already exists, increase the quantity
-      if (existingPizza) {
-        return previousItems.map((item) =>
-          item.id === pizza.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
-      }
-
-      // Otherwise add a new pizza with quantity 1
-      return [...previousItems, { ...pizza, quantity: 1 }];
+  const resetCartState = useCallback(() => {
+    setCart({
+      id: null,
+      items: [],
+      totalQuantity: 0,
+      total: 0,
     });
-  }
-  // Increase the quantity of a pizza
-  function increaseQuantity(id) {
-    setCartItems((previousItems) =>
-      previousItems.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-      ),
-    );
-  }
+  }, []);
 
-  // Decrease the quantity of a pizza
-  function decreaseQuantity(id) {
-    setCartItems((previousItems) =>
-      previousItems
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
-  }
+  // ===========================================================
+  // LOAD REAL MONGODB CART
+  // ===========================================================
 
-  // Remove a pizza completely from the cart
-  function removeFromCart(id) {
-    const pizza = cartItems.find((item) => item.id === id);
-
-    if (pizza) {
-      toast.error(`🗑 ${pizza.name} removed from cart`);
+  const refreshCart = useCallback(async () => {
+    if (!isAuthenticated) {
+      resetCartState();
+      return;
     }
 
-    setCartItems((previousItems) =>
-      previousItems.filter((item) => item.id !== id),
-    );
-  }
-  // Calculate the total price of all pizzas in the cart
-  function getCartTotal() {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
-  }
+    try {
+      setLoading(true);
 
-  // Calculate the total number of pizzas in the cart
-  function getCartCount() {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  }
-  // Everything placed inside "value" becomes available
-  // to every component wrapped by this Provider.
-  const value = {
-    cartItems,
-    setCartItems,
-    addToCart,
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
-    getCartTotal,
-    getCartCount,
+      const result = await getCart();
+
+      setCart(result.cart);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Could not load your cart.");
+    } finally {
+      setLoading(false);
+    }
+  }, [isAuthenticated, resetCartState]);
+
+  useEffect(() => {
+    refreshCart();
+  }, [refreshCart]);
+
+  // ===========================================================
+  // ADD CATALOG PIZZA
+  // ===========================================================
+
+  const addToCart = async (pizza) => {
+    try {
+      const pizzaId = pizza?._id || pizza?.id;
+
+      if (!pizzaId) {
+        throw new Error("Pizza ID is missing.");
+      }
+
+      await addCatalogPizza(pizzaId, 1);
+
+      /*
+      Reload after mutation so every catalog/custom reference
+      is fully populated exactly as GET /api/cart returns it.
+      */
+      await refreshCart();
+
+      toast.success(`🍕 ${pizza.name} added to cart!`);
+
+      return true;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          error.message ||
+          "Could not add pizza to cart.",
+      );
+
+      return false;
+    }
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {/* Render every component inside the Provider */}
-      {children}
-    </CartContext.Provider>
+  // ===========================================================
+  // ADD CUSTOM PIZZA
+  // ===========================================================
+
+  const addCustomPizza = async ({
+    baseId,
+    sauceId,
+    cheeseId,
+    vegetableIds,
+    quantity = 1,
+  }) => {
+    try {
+      await addCustomPizzaRequest({
+        baseId,
+        sauceId,
+        cheeseId,
+        vegetableIds,
+        quantity,
+      });
+
+      await refreshCart();
+
+      toast.success("🍕 Your custom pizza was added to the cart!");
+
+      return true;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Could not add your custom pizza.",
+      );
+
+      return false;
+    }
+  };
+
+  // ===========================================================
+  // CHANGE QUANTITY
+  // ===========================================================
+
+  const setQuantity = async (itemId, quantity) => {
+    try {
+      if (quantity < 1) {
+        return;
+      }
+
+      await updateCartItem(itemId, quantity);
+
+      await refreshCart();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Could not update quantity.",
+      );
+    }
+  };
+
+  const increaseQuantity = async (itemId) => {
+    const item = cart.items.find((cartItem) => cartItem.id === itemId);
+
+    if (!item) return;
+
+    await setQuantity(itemId, item.quantity + 1);
+  };
+
+  const decreaseQuantity = async (itemId) => {
+    const item = cart.items.find((cartItem) => cartItem.id === itemId);
+
+    if (!item) return;
+
+    if (item.quantity === 1) {
+      return;
+    }
+
+    await setQuantity(itemId, item.quantity - 1);
+  };
+
+  // ===========================================================
+  // REMOVE ITEM
+  // ===========================================================
+
+  const removeFromCart = async (itemId) => {
+    try {
+      await removeCartItem(itemId);
+
+      await refreshCart();
+
+      toast.success("Item removed from cart.");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Could not remove the cart item.",
+      );
+    }
+  };
+
+  // ===========================================================
+  // CLEAR CART
+  // ===========================================================
+
+  const clearCart = async () => {
+    try {
+      await clearCustomerCart();
+
+      await refreshCart();
+
+      toast.success("Cart cleared.");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Could not clear the cart.");
+    }
+  };
+
+  // ===========================================================
+  // COMPATIBILITY HELPERS
+  // ===========================================================
+
+  const getCartCount = () => cart.totalQuantity || 0;
+
+  const getCartTotal = () => Number(cart.total || 0);
+
+  const value = useMemo(
+    () => ({
+      cart,
+      cartItems: cart.items,
+      loading,
+
+      refreshCart,
+
+      addToCart,
+      addCustomPizza,
+
+      increaseQuantity,
+      decreaseQuantity,
+      setQuantity,
+
+      removeFromCart,
+      clearCart,
+
+      getCartCount,
+      getCartTotal,
+    }),
+    [cart, loading, refreshCart],
   );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-// Export the Provider so App.jsx can use it.
+export function useCart() {
+  const context = useContext(CartContext);
+
+  if (!context) {
+    throw new Error("useCart must be used inside CartProvider.");
+  }
+
+  return context;
+}
+
 export default CartProvider;

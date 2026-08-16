@@ -1,139 +1,251 @@
-// Import React's useContext hook
-import { useContext } from "react";
-
-// Import the shopping cart context
-import { CartContext } from "../context/CartContext";
-
-// Import the CSS file for styling the cart page
-import "./Cart.css";
-// Import the Link component from react-router-dom for navigation
 import { Link } from "react-router-dom";
 
-// Shopping Cart page
+import { useCart } from "../context/CartContext";
+
+import { getImageUrl } from "../utils/imageUrl";
+
+import "./Cart.css";
+
 function Cart() {
-  // Access the shared cart data and functions from the CartContext
   const {
     cartItems,
+    loading,
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
+    clearCart,
     getCartTotal,
     getCartCount,
-  } = useContext(CartContext);
+  } = useCart();
+
+  // ===========================================================
+  // DISPLAY HELPERS
+  // ===========================================================
+
+  const getItemName = (item) => {
+    if (item.itemType === "catalog") {
+      return item.pizza?.name || "Pizza";
+    }
+
+    return "Your Custom Pizza";
+  };
+
+  const getCustomDescription = (item) => {
+    const custom = item.customPizza;
+
+    if (!custom) return "";
+
+    const vegetables =
+      custom.vegetables?.map((vegetable) => vegetable.name).join(", ") ||
+      "No vegetables";
+
+    return [
+      custom.base?.name,
+      custom.sauce?.name,
+      custom.cheese?.name,
+      vegetables,
+    ]
+      .filter(Boolean)
+      .join(" • ");
+  };
+
+  // ===========================================================
+  // LOADING
+  // ===========================================================
+
+  if (loading && cartItems.length === 0) {
+    return (
+      <div className="cart-loading">
+        <div className="cart-spinner" />
+        <h2>Loading your cart...</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="cart-page">
-      {/* ==========================
-          PAGE TITLE
-      ========================== */}
-      {/* ==========================
-    PAGE HEADER
-========================== */}
-      <div className="cart-header">
-        <h1>Shopping Cart</h1>
+      <header className="cart-header">
+        <span className="cart-eyebrow">Your Order</span>
 
-        {cartItems.length > 0 && (
-          <p>
-            {getCartCount()} item{getCartCount() > 1 ? "s" : ""}
-          </p>
-        )}
-      </div>
+        <h1>Your pizza cart.</h1>
 
-      {/* ======================================================
-          IF THE CART IS EMPTY
-          Show a friendly message.
+        <p>Review your choices before heading to checkout.</p>
+      </header>
 
-          OTHERWISE
-          Show the pizzas and the order summary.
-      ====================================================== */}
       {cartItems.length === 0 ? (
-        <div className="empty-cart">
-          <h2>🛒 Your cart is empty</h2>
+        <section className="empty-cart">
+          <div className="empty-cart-icon">🛒</div>
 
-          <p>Looks like you haven't added any delicious pizzas yet.</p>
+          <h2>Your cart is waiting.</h2>
 
-          <Link to="/menu">
-            <button className="browse-menu-btn">Browse Menu</button>
-          </Link>
-        </div>
+          <p>
+            Add one of our kitchen favourites or create something completely
+            your own.
+          </p>
+
+          <div className="empty-cart-actions">
+            <Link to="/menu" className="browse-menu-btn">
+              Browse Menu
+            </Link>
+
+            <Link to="/builder" className="build-pizza-btn">
+              Build Your Pizza
+            </Link>
+          </div>
+        </section>
       ) : (
-        <>
-          {/* ==========================================
-              DISPLAY EVERY PIZZA INSIDE THE CART
-          ========================================== */}
-          {cartItems.map((pizza) => (
-            <div key={pizza.id} className="cart-item">
-              {/* Pizza Image */}
-              <img src={pizza.image} alt={pizza.name} className="cart-image" />
+        <div className="cart-layout">
+          {/* ==================================================
+              ITEMS
+          ================================================== */}
 
-              {/* Pizza Information */}
-              <div className="cart-details">
-                <h3>{pizza.name}</h3>
+          <section className="cart-items-section">
+            <div className="cart-section-title">
+              <div>
+                <span className="cart-eyebrow">Basket</span>
 
-                <p>{pizza.description}</p>
+                <h2>
+                  {getCartCount()} item
+                  {getCartCount() !== 1 ? "s" : ""}
+                </h2>
+              </div>
 
-                <h4>R {pizza.price}</h4>
+              <button
+                type="button"
+                className="clear-cart-btn"
+                onClick={clearCart}
+              >
+                Clear cart
+              </button>
+            </div>
 
-                {/* Quantity controls */}
-                <div className="cart-actions">
-                  <div className="quantity-controls">
-                    <button onClick={() => decreaseQuantity(pizza.id)}>
-                      −
-                    </button>
+            {cartItems.map((item) => {
+              const catalogImage =
+                item.itemType === "catalog"
+                  ? getImageUrl(item.pizza?.image)
+                  : "";
 
-                    <span>{pizza.quantity}</span>
+              return (
+                <article key={item.id} className="cart-item">
+                  <div className="cart-item-visual">
+                    {catalogImage ? (
+                      <img
+                        src={catalogImage}
+                        alt={getItemName(item)}
+                        className="cart-image"
+                      />
+                    ) : (
+                      <div className="cart-custom-image">🍕</div>
+                    )}
 
-                    <button onClick={() => increaseQuantity(pizza.id)}>
-                      +
-                    </button>
+                    <span className="cart-item-type">
+                      {item.itemType === "catalog"
+                        ? "Menu Pizza"
+                        : "Custom Pizza"}
+                    </span>
                   </div>
 
-                  {/* Remove item */}
-                  <button
-                    className="remove-link"
-                    onClick={() => removeFromCart(pizza.id)}
-                  >
-                    🗑 Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+                  <div className="cart-details">
+                    <div className="cart-item-heading">
+                      <div>
+                        <h3>{getItemName(item)}</h3>
 
-          {/* ==========================================
-              ORDER SUMMARY
-          ========================================== */}
-          <div className="order-summary">
-            <h2>Order Summary</h2>
+                        <p>
+                          {item.itemType === "catalog"
+                            ? item.pizza?.description
+                            : getCustomDescription(item)}
+                        </p>
+                      </div>
+
+                      <strong className="cart-item-subtotal">
+                        R {Number(item.subtotal).toFixed(2)}
+                      </strong>
+                    </div>
+
+                    <div className="cart-item-footer">
+                      <div className="quantity-controls">
+                        <button
+                          type="button"
+                          onClick={() => decreaseQuantity(item.id)}
+                          disabled={item.quantity <= 1}
+                        >
+                          −
+                        </button>
+
+                        <span>{item.quantity}</span>
+
+                        <button
+                          type="button"
+                          onClick={() => increaseQuantity(item.id)}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <div className="cart-unit-price">
+                        R {Number(item.unitPrice).toFixed(2)}
+                        <span> each</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="remove-link"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </section>
+
+          {/* ==================================================
+              SUMMARY
+          ================================================== */}
+
+          <aside className="order-summary">
+            <span className="cart-eyebrow">Order Summary</span>
+
+            <h2>Almost there.</h2>
 
             <div className="summary-row">
               <span>Items</span>
-              <span>{getCartCount()}</span>
+              <strong>{getCartCount()}</strong>
             </div>
 
             <div className="summary-row">
               <span>Subtotal</span>
-              <span>R {getCartTotal().toFixed(2)}</span>
+              <strong>R {getCartTotal().toFixed(2)}</strong>
             </div>
 
             <div className="summary-row">
               <span>Delivery</span>
-              <span>FREE</span>
+              <strong className="free-delivery">FREE</strong>
             </div>
 
-            <hr />
+            <div className="summary-divider" />
 
             <div className="summary-row total">
               <span>Total</span>
-              <span>R {getCartTotal().toFixed(2)}</span>
+
+              <strong>R {getCartTotal().toFixed(2)}</strong>
             </div>
 
-            {/* Checkout button */}
-            <Link to="/checkout">
-              <button className="checkout-btn">Proceed to Checkout</button>
+            <Link to="/checkout" className="checkout-btn">
+              Proceed to Checkout →
             </Link>
-          </div>
-        </>
+
+            <Link to="/menu" className="continue-shopping">
+              ← Continue shopping
+            </Link>
+
+            <div className="cart-security-note">
+              🔒 Prices are verified again by the kitchen before payment.
+            </div>
+          </aside>
+        </div>
       )}
     </div>
   );

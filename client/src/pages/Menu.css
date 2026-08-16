@@ -1,151 +1,236 @@
-/* ===========================================================
-   MENU PAGE
-=========================================================== */
-
 .menu-page {
-  max-width: 1300px;
-  margin: 40px auto;
-  padding: 0 30px;
+  max-width: 1350px;
+
+  margin: 0 auto;
+
+  padding: 55px 30px 90px;
 }
 
 /* ===========================================================
-   PAGE HEADER
+   HERO
 =========================================================== */
 
-.menu-page h1 {
-  font-size: 38px;
-  margin-bottom: 10px;
+.menu-hero {
+  max-width: 720px;
+
+  margin: 0 auto 45px;
+
   text-align: center;
-  color: var(--text-dark);
 }
 
-.menu-page p {
-  text-align: center;
+.menu-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  color: var(--primary-color);
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.6px;
+
+  text-transform: uppercase;
+}
+
+.menu-hero h1 {
+  margin-bottom: 15px;
+
+  font-size: clamp(38px, 5vw, 58px);
+
+  line-height: 1.08;
+}
+
+.menu-hero p {
   color: var(--text-light);
-  margin-bottom: 35px;
+
+  font-size: 18px;
+
+  line-height: 1.7;
 }
 
 /* ===========================================================
-   SEARCH + SORT TOOLBAR
+   FILTER CARD
 =========================================================== */
+
+.menu-control-card {
+  margin-bottom: 38px;
+
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.85);
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  border-radius: 20px;
+
+  box-shadow: var(--shadow-sm);
+}
 
 .menu-toolbar {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
 }
 
-/* ===========================================================
-   SEARCH BAR
-=========================================================== */
+.search-bar,
+.sort-dropdown {
+  padding: 14px 16px;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 12px;
+
+  background: white;
+
+  font-size: 15px;
+
+  transition: 0.2s;
+}
 
 .search-bar {
   flex: 1;
-  min-width: 280px;
-  max-width: 500px;
-  padding: 14px 20px;
-  font-size: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background: white;
-  box-shadow: var(--shadow-sm);
-  transition: 0.3s;
 }
-
-.search-bar:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
-}
-
-/* ===========================================================
-   SORT DROPDOWN
-=========================================================== */
 
 .sort-dropdown {
-  width: 220px;
-  padding: 14px 18px;
-  font-size: 15px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background: white;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: 0.3s;
+  min-width: 220px;
 }
 
-.sort-dropdown:hover {
-  border-color: var(--primary-color);
-}
-
+.search-bar:focus,
 .sort-dropdown:focus {
   outline: none;
+
   border-color: var(--primary-color);
-  box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.09);
 }
 
 /* ===========================================================
-   CATEGORY FILTER BUTTONS
+   CATEGORIES
 =========================================================== */
 
 .category-buttons {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+
   flex-wrap: wrap;
-  margin-bottom: 40px;
+
+  gap: 9px;
 }
 
 .category-buttons button {
-  padding: 10px 22px;
-  border: none;
-  border-radius: 25px;
-  background: white;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 600;
+  padding: 10px 17px;
+
+  border-radius: 50px;
+
+  background: #f8f8f8;
+
+  color: #555;
+
+  font-weight: 700;
 }
 
-.category-buttons button:hover {
+.category-buttons button:hover,
+.category-buttons button.active {
   background: var(--primary-color);
+
   color: white;
 }
 
 /* ===========================================================
-   PIZZA GRID
+   RESULTS
 =========================================================== */
+
+.menu-results {
+  margin-bottom: 18px;
+
+  color: var(--text-light);
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
 
 .pizza-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+
+  gap: 27px;
 }
 
 /* ===========================================================
-   RESPONSIVE DESIGN
+   LOADING / EMPTY / ERROR
 =========================================================== */
 
-@media (max-width: 768px) {
+.menu-state {
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  text-align: center;
+
+  color: var(--text-light);
+}
+
+.menu-state > span {
+  font-size: 45px;
+}
+
+.menu-state h3 {
+  color: var(--text-dark);
+
+  font-size: 23px;
+}
+
+.menu-state.error h3 {
+  color: #a52626;
+}
+
+.menu-loader {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid #f1ddd3;
+
+  border-top-color: var(--primary-color);
+
+  border-radius: 50%;
+
+  animation: menu-spin 0.8s linear infinite;
+}
+
+@keyframes menu-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media (max-width: 700px) {
+  .menu-page {
+    padding: 40px 18px 70px;
+  }
+
   .menu-toolbar {
     flex-direction: column;
-    align-items: stretch;
   }
 
-  .search-bar,
   .sort-dropdown {
     width: 100%;
-    max-width: 100%;
-  }
 
-  .category-buttons {
-    gap: 10px;
-  }
-
-  .category-buttons button {
-    flex: 1 1 45%;
+    min-width: 0;
   }
 }
