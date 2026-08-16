@@ -1128,6 +1128,270 @@ The payment architecture was intentionally separated from the rest of the orderi
 
 ---
 
+# 🌿 Version Control and Development Workflow
+
+Git and GitHub were used throughout the project not only for source-code storage, but also to maintain a structured development history and separate major areas of development.
+
+## Branching Strategy
+
+The repository was developed using three primary branches:
+
+```text
+main
+├── backend-auth
+└── frontend-ui
+```
+
+### `backend-auth`
+
+This branch was primarily used for backend development and progressively introduced functionality such as:
+
+- Authentication and authorization.
+- MongoDB models and database integration.
+- Pizza management.
+- Customer cart functionality.
+- Checkout and order creation.
+- Payment processing architecture.
+- Atomic inventory deduction.
+- Administrator order management.
+- Order-status tracking.
+- Inventory management.
+- Automated low-stock email notifications.
+
+Backend functionality was committed incrementally rather than being introduced as one large final commit.
+
+Examples of development milestones included:
+
+```text
+feat(pizza): implement admin pizza management and image uploads
+
+feat(order): complete cart checkout payment and atomic inventory flow
+
+feat(orders): add admin management and order status tracking
+
+feat(inventory): add automated low-stock email notifications
+```
+
+This creates a Git history that reflects how the backend evolved throughout development.
+
+### `frontend-ui`
+
+The `frontend-ui` branch was used for the customer and administrator interfaces and for the final frontend/backend integration work.
+
+This included:
+
+- Customer authentication interfaces.
+- Protected React routes.
+- Customer dashboard.
+- Pizza menu.
+- Pizza builder.
+- Shopping cart.
+- Checkout.
+- Payment interface.
+- Order history and tracking.
+- Administrator dashboard.
+- Inventory interface.
+- Pizza-management interface.
+- Responsive layouts.
+- API service integration.
+- Final UI and integration improvements.
+
+After integration testing was completed, the work was committed as a frontend integration milestone before being merged into `main`.
+
+### `main`
+
+The `main` branch represents the final integrated and stable version of the application.
+
+The final integration process followed:
+
+```text
+backend-auth
+      ↓
+    main
+      ↑
+frontend-ui
+```
+
+The completed backend branch was first merged into `main`, followed by the frontend/integration branch.
+
+This preserved the development history of both areas while producing one final application branch.
+
+---
+
+# 🔀 Merge Conflict Resolution
+
+The final integration also provided practical experience resolving Git merge conflicts.
+
+Because both the backend and frontend-integration work modified some shared backend configuration files, Git detected conflicts while merging `frontend-ui` into `main`.
+
+The affected files included:
+
+```text
+server/.gitignore
+server/controllers/authController.js
+server/server.js
+```
+
+Rather than deleting changes or recreating files manually, the conflicting versions were reviewed in the context of the completed application.
+
+The final integration versions were retained because they contained the later application-level changes required by the completed frontend/backend integration.
+
+The resolved files were then staged and the merge was completed with a dedicated merge commit.
+
+The resulting workflow was:
+
+```text
+Merge Branch
+     ↓
+Git Detects Conflicts
+     ↓
+Identify Conflicting Files
+     ↓
+Determine Correct Final Versions
+     ↓
+Stage Resolved Files
+     ↓
+Verify with git status
+     ↓
+Create Merge Commit
+     ↓
+Push Integrated main Branch
+```
+
+This demonstrated an important part of collaborative software development: merge conflicts are not simply errors to bypass; they require understanding which changes belong in the final application.
+
+---
+
+# 🖥️ Git Command-Line Workflow
+
+The project was managed primarily through Git commands in the terminal.
+
+Commands used during the development and integration process included:
+
+```bash
+git status
+git add .
+git commit -m "commit message"
+git push origin <branch>
+git switch <branch>
+git log --oneline
+git stash push -u -m "description"
+git stash pop
+git checkout --theirs <file>
+git merge <branch>
+git reset --hard HEAD
+```
+
+Each command served a specific role in the development workflow.
+
+For example:
+
+```bash
+git status
+```
+
+was used frequently before commits and merges to verify the state of the working tree.
+
+```bash
+git log --oneline
+```
+
+was used to inspect development milestones and branch history.
+
+```bash
+git stash
+```
+
+was used when completed but uncommitted integration work needed to be preserved temporarily before changing branches.
+
+```bash
+git merge
+```
+
+was used to bring completed development branches together into the final `main` branch.
+
+---
+
+# 🛟 Recovering from an Interrupted Branch Switch
+
+During the final version-control process, a branch switch was interrupted by a Windows file-locking issue while Git was attempting to update `HEAD`.
+
+This resulted in the working tree and index being partially updated while Git still reported the previous branch as active.
+
+Because the completed frontend work had already been committed and pushed to GitHub, the repository could safely be restored to the known commit using:
+
+```bash
+git reset --hard HEAD
+```
+
+After confirming:
+
+```text
+nothing to commit, working tree clean
+```
+
+the branch switch was attempted again successfully.
+
+This experience reinforced several practical Git principles:
+
+- Commit important work before risky repository operations.
+- Push important milestones to the remote repository.
+- Check `git status` before and after branch operations.
+- Do not panic when the working tree unexpectedly changes.
+- Understand the repository state before running recovery commands.
+- Avoid destructive Git commands unless the desired work is already safely committed.
+- Keep development servers and unnecessary repository processes stopped during important branch and merge operations when file locking may be a concern.
+
+---
+
+# 🔐 Protecting Environment Secrets in Git
+
+Environment configuration was also handled as part of the version-control strategy.
+
+Real environment files such as:
+
+```text
+client/.env
+server/.env
+```
+
+are excluded from version control.
+
+Safe templates are provided instead:
+
+```text
+client/.env.example
+server/.env.example
+```
+
+Before the final commits, `git status` was explicitly reviewed to confirm that real `.env` files, `node_modules`, and frontend build output were not being staged.
+
+This ensures that the public repository documents the required configuration without exposing private credentials.
+
+---
+
+# 📚 Version Control Learning Outcomes
+
+Developing this project provided practical experience beyond simply writing application code.
+
+The version-control workflow involved:
+
+- Maintaining separate development branches.
+- Creating incremental feature commits.
+- Switching safely between branches.
+- Using Git stash to preserve unfinished integration work.
+- Understanding tracked, untracked, staged, and ignored files.
+- Protecting environment credentials.
+- Reading Git status and commit history.
+- Recovering from an interrupted branch operation.
+- Resolving merge conflicts.
+- Creating merge commits.
+- Combining independent development histories.
+- Maintaining a stable `main` branch.
+- Synchronising local branches with GitHub.
+
+The final repository therefore serves not only as the source code for the pizza delivery application, but also as a record of the project's continuous development and integration process.
+
 # 🔮 Potential Future Improvements
 
 Outside the current internship submission scope, future development could include:
