@@ -1,6 +1,9 @@
 // Outlet is the placeholder where child pages will be displayed
 import { Outlet } from "react-router-dom";
 
+// Importing the CSS file for styling the authentication layout
+import "./AuthLayout.css";
+
 // Layout used for all authentication-related pages
 function AuthLayout() {
   return (

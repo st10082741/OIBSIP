@@ -1,97 +1,206 @@
-/* ==========================================
-   PIZZA CARD
-========================================== */
+/* ===========================================================
+   MODERN PIZZA CARD
+=========================================================== */
 
 .pizza-card {
-  background: white;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  position: relative;
+
   overflow: hidden;
-  transition: 0.3s;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(30, 30, 30, 0.06);
+
+  border-radius: 22px;
+
+  box-shadow: 0 8px 30px rgba(40, 30, 20, 0.07);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .pizza-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-7px);
+
+  box-shadow: 0 20px 45px rgba(40, 30, 20, 0.13);
 }
+
+/* ===========================================================
+   IMAGE
+=========================================================== */
 
 .pizza-image-container {
   position: relative;
+
+  height: 235px;
+
   overflow: hidden;
+
+  background: #fff3eb;
 }
 
 .pizza-image {
   width: 100%;
-  height: 220px;
+  height: 100%;
+
   object-fit: cover;
-  transition: transform 0.4s ease;
+
+  transition: transform 0.45s ease;
 }
 
 .pizza-card:hover .pizza-image {
-  transform: scale(1.08);
+  transform: scale(1.06);
+}
+
+/* Pizza without uploaded image */
+
+.pizza-image-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  background: radial-gradient(circle at center, #fff8f2, #ffe9da);
+}
+
+.pizza-image-placeholder span {
+  font-size: 70px;
+}
+
+.pizza-image-placeholder small {
+  color: #9b725f;
+  font-weight: 700;
+}
+
+/* ===========================================================
+   BADGES
+=========================================================== */
+
+.popular-badge,
+.pizza-category-badge {
+  position: absolute;
+  top: 15px;
+
+  z-index: 2;
+
+  padding: 7px 12px;
+
+  border-radius: 50px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  backdrop-filter: blur(8px);
 }
 
 .popular-badge {
-  position: absolute;
-  top: 15px;
   left: 15px;
-  background: #ff6b35;
+
+  background: rgba(255, 107, 53, 0.94);
+
   color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  z-index: 2;
 }
 
-.favorite-btn {
-  position: absolute;
-  top: 15px;
+.pizza-category-badge {
   right: 15px;
-  border: none;
-  background: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  z-index: 2;
-  box-shadow: var(--shadow-sm);
-  transition: 0.3s;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #444;
 }
 
-.favorite-btn:hover {
-  transform: scale(1.1);
-}
+/* ===========================================================
+   CONTENT
+=========================================================== */
 
 .pizza-content {
   padding: 24px;
 }
 
-.pizza-content h3 {
-  margin-bottom: 10px;
-}
+.pizza-title-row {
+  display: flex;
 
-.rating {
-  color: goldenrod;
-  font-weight: 600;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 14px;
+
   margin-bottom: 12px;
 }
 
-.pizza-content p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
+.pizza-title-row h3 {
+  font-size: 21px;
+
+  line-height: 1.2;
 }
+
+.rating {
+  flex-shrink: 0;
+
+  color: #9a7100;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  background: #fff8d9;
+
+  padding: 6px 9px;
+
+  border-radius: 50px;
+}
+
+.pizza-description {
+  min-height: 52px;
+
+  margin-bottom: 24px;
+
+  color: var(--text-light);
+
+  line-height: 1.6;
+}
+
+/* ===========================================================
+   FOOTER
+=========================================================== */
 
 .card-footer {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+
+  gap: 15px;
+}
+
+.price-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #999;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+
+  font-weight: 700;
 }
 
 .card-footer h4 {
   color: var(--primary-color);
+
+  font-size: 22px;
+
   margin: 0;
 }

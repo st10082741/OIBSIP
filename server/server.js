@@ -98,8 +98,15 @@ connectDB();
 // ------------------------------------------------------------
 // Global Middleware
 // ------------------------------------------------------------
-
-app.use(cors());
+// Enable CORS for requests from the frontend client.
+//app.use(cors());
+// Enable CORS for requests from the frontend client good for development and production environments.
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 

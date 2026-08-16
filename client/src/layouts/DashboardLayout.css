@@ -1,0 +1,23 @@
+.dashboard-layout {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #faf8f5;
+
+  background-image:
+    linear-gradient(rgba(250, 248, 245, 0.72), rgba(250, 248, 245, 0.72)),
+    url("../assets/backgrounds/customer-bg.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.main-content {
+  flex: 1;
+
+  position: relative;
+}

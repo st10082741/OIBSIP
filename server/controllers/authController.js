@@ -32,6 +32,17 @@ const User = require("../models/User");
 const sendEmail = require("../config/email");
 
 // =============================================================
+// PASSWORD VALIDATION
+// =============================================================
+
+const isStrongPassword = (password) => {
+  const strongPasswordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+  return strongPasswordPattern.test(password);
+};
+
+// =============================================================
 // REGISTER USER
 // =============================================================
 
@@ -39,6 +50,21 @@ const registerUser = async (req, res) => {
   try {
     // Read registration information from the request body.
     const { name, email, password } = req.body;
+    // Validate that all required fields are provided.
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email and password are required.",
+      });
+    }
+
+    if (!isStrongPassword(password)) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Password must be at least 8 characters and include uppercase, lowercase, a number and a special character.",
+      });
+    }
 
     // Check whether the email address is already registered.
     const existingUser = await User.findOne({ email });
@@ -159,10 +185,7 @@ const verifyEmail = async (req, res) => {
 
     await user.save();
 
-    return res.status(200).json({
-      success: true,
-      message: "Email verified successfully. You can now log in.",
-    });
+    return res.redirect(`${process.env.CLIENT_URL}/login?verified=true`);
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -387,15 +410,14 @@ const resetPassword = async (req, res) => {
         message: "Please provide a new password.",
       });
     }
-
-    // Require a reasonable minimum password length.
-    if (password.length < 8) {
+    // Validate the strength of the new password.
+    if (!isStrongPassword(password)) {
       return res.status(400).json({
         success: false,
-        message: "Password must contain at least 8 characters.",
+        message:
+          "Password must be at least 8 characters and include uppercase, lowercase, a number and a special character.",
       });
     }
-
     /*
     Hash the token received from the URL.
 
