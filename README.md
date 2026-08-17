@@ -1412,7 +1412,8 @@ This separation allows the frontend, backend, and database to be deployed and ma
 
 MongoDB Atlas is used as the cloud-hosted database.
 
-During the initial backend configuration, a MongoDB Atlas connection string was created and stored in the backend environment variables rather than being hard-coded into the application.
+During the initial backend configuration, a MongoDB Atlas connection string was created and stored in
+the backend environment variables rather than being hard-coded into the application.
 
 Example:
 
@@ -1424,7 +1425,8 @@ MONGODB_URI=<MongoDB Atlas connection string>
 The backend is currently deployed using Render's free hosting tier. Free-tier services can experience a
 startup delay after periods of inactivity.
 
-During this startup period, the frontend may temporarily appear to be waiting for a response because authentication and other application functionality depend on the Render-hosted API.
+During this startup period, the frontend may temporarily appear to be waiting for a response because
+authentication and other application functionality depend on the Render-hosted API.
 
 The request flow is:
 
@@ -1445,14 +1447,17 @@ The Pizza Delivery System has been deployed and can be tested using the links be
 ### Customer Application
 **Live Application:** https://oibsip-psi-orcin.vercel.app/login
 
-Customers can register/login, browse the menu, build custom pizzas, manage their cart, complete checkout, use the test payment flow, and track their orders.
+Customers can register/login, browse the menu, build custom pizzas, manage their cart, complete checkout,
+ use the test payment flow, and track their orders.
 
 ### Admin Application
 **Live Application:** https://oibsip-psi-orcin.vercel.app/admin/login
 
-The Admin application provides access to administrative functionality such as inventory management, order management, and updating customer order statuses.
+The Admin application provides access to administrative functionality such as inventory management,
+ order management, and updating customer order statuses.
 
-> **Note:** The Customer and Admin applications are intentionally maintained as separate application experiences. They communicate with the same backend API and database but have separate authentication entry points.
+> **Note:** The Customer and Admin applications are intentionally maintained as separate application experiences.
+ They communicate with the same backend API and database but have separate authentication entry points.
 
 **Note:** For security reasons, **administrator credentials are not publicly included in this repository or README**.
 ---
