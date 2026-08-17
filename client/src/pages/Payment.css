@@ -1,235 +1,426 @@
+/* ===========================================================
+   PAYMENT PAGE
+=========================================================== */
+
 .payment-page,
 .payment-result-page,
 .payment-state {
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 140px);
+
   display: grid;
   place-items: center;
-  padding: 55px 20px 90px;
+
+  padding: 34px 20px 60px;
 }
+
+/* ===========================================================
+   PAYMENT CARD
+=========================================================== */
 
 .payment-card,
 .payment-result {
-  width: min(620px, 100%);
-  padding: 38px;
-  border-radius: 26px;
-  background: white;
+  width: min(540px, 100%);
+
+  padding: 30px;
+
   border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 22px 65px rgba(35, 20, 12, 0.1);
+  border-radius: 20px;
+
+  background: white;
+
+  box-shadow: 0 16px 45px rgba(35, 20, 12, 0.09);
 }
+
+/* ===========================================================
+   HEADER
+=========================================================== */
 
 .payment-brand {
   display: flex;
+
   justify-content: space-between;
-  gap: 25px;
-  margin-bottom: 28px;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  margin-bottom: 22px;
 }
 
 .payment-eyebrow,
 .payment-result > span {
   display: inline-block;
-  margin-bottom: 10px;
+
+  margin-bottom: 7px;
+
   color: var(--primary-color);
-  font-size: 12px;
+
+  font-size: 10px;
   font-weight: 900;
-  letter-spacing: 1.4px;
+
+  letter-spacing: 1.2px;
   text-transform: uppercase;
 }
 
 .payment-brand h1,
 .payment-result h1 {
-  margin-bottom: 12px;
-  font-size: clamp(31px, 5vw, 43px);
+  margin-bottom: 9px;
+
+  font-size: clamp(27px, 4vw, 35px);
+
   line-height: 1.08;
+  letter-spacing: -0.8px;
 }
 
 .payment-brand p,
 .payment-result p {
   color: var(--text-light);
-  line-height: 1.65;
+
+  font-size: 13px;
+  line-height: 1.55;
 }
 
+/* ===========================================================
+   SECURITY ICON
+=========================================================== */
+
 .payment-lock {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
+
   display: grid;
   place-items: center;
+
   flex-shrink: 0;
-  border-radius: 16px;
+
+  border-radius: 13px;
+
   background: #fff1e9;
-  font-size: 22px;
+
+  font-size: 18px;
 }
+
+/* ===========================================================
+   ORDER INFORMATION
+=========================================================== */
 
 .payment-order-box {
   display: flex;
   flex-direction: column;
-  gap: 17px;
-  margin: 28px 0;
-  padding: 20px;
-  border-radius: 17px;
+
+  gap: 12px;
+
+  margin: 21px 0;
+
+  padding: 16px;
+
+  border-radius: 13px;
+
   background: #faf8f7;
 }
 
 .payment-order-box > div {
   display: flex;
+
   justify-content: space-between;
-  gap: 20px;
+
+  gap: 16px;
 }
 
 .payment-order-box span {
   color: var(--text-light);
+
+  font-size: 12px;
+}
+
+.payment-order-box strong {
+  font-size: 12px;
 }
 
 .payment-order-box small {
-  max-width: 310px;
+  max-width: 270px;
+
   overflow-wrap: anywhere;
+
   text-align: right;
+
   color: var(--text-light);
+
+  font-size: 10px;
 }
+
+/* ===========================================================
+   TEST MODE NOTICE
+=========================================================== */
 
 .payment-demo-note {
   display: flex;
-  gap: 12px;
-  padding: 17px;
-  border-radius: 15px;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 13px;
+
+  border: 1px solid rgba(249, 115, 22, 0.09);
+  border-radius: 12px;
+
   background: #fff7ed;
 }
 
-.payment-demo-note p {
-  margin-top: 4px;
-  color: var(--text-light);
-  font-size: 13px;
-  line-height: 1.5;
+.payment-demo-note > span {
+  font-size: 17px;
 }
+
+.payment-demo-note strong {
+  color: var(--text-dark);
+
+  font-size: 12px;
+}
+
+.payment-demo-note p {
+  margin-top: 3px;
+
+  color: var(--text-light);
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* ===========================================================
+   PAYMENT SIMULATOR ACTIONS
+=========================================================== */
 
 .payment-actions {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 25px;
+
+  gap: 10px;
+
+  margin-top: 19px;
 }
 
 .payment-success-btn,
 .payment-failure-btn {
-  padding: 15px;
-  border-radius: 13px;
+  padding: 12px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
   font-weight: 900;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .payment-success-btn {
   background: #238b57;
+
   color: white;
+
+  box-shadow: 0 7px 18px rgba(35, 139, 87, 0.18);
+}
+
+.payment-success-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow: 0 9px 22px rgba(35, 139, 87, 0.23);
 }
 
 .payment-failure-btn {
-  background: #fff0f0;
-  color: #b23030;
   border: 1px solid #f1c5c5;
+
+  background: #fff0f0;
+
+  color: #b23030;
 }
+
+.payment-failure-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ===========================================================
+   BACK LINK
+=========================================================== */
 
 .payment-back {
   display: block;
-  margin-top: 22px;
+
+  margin-top: 17px;
+
   text-align: center;
+
   color: var(--text-light);
-  font-size: 13px;
+
+  font-size: 11px;
   font-weight: 700;
 }
 
-.payment-error {
-  margin: 18px 0;
-  padding: 14px;
-  border-radius: 12px;
-  background: #fff1f1;
-  color: #a92727;
+.payment-back:hover {
+  color: var(--primary-color);
 }
+
+/* ===========================================================
+   ERROR
+=========================================================== */
+
+.payment-error {
+  margin: 14px 0;
+
+  padding: 11px 12px;
+
+  border-radius: 10px;
+
+  background: #fff1f1;
+
+  color: #a92727;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ===========================================================
+   RESULT PAGE
+=========================================================== */
 
 .payment-result {
   text-align: center;
 }
 
 .payment-result-icon {
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
+
   display: grid;
   place-items: center;
-  margin: 0 auto 22px;
+
+  margin: 0 auto 17px;
+
   border-radius: 50%;
-  font-size: 38px;
+
+  font-size: 29px;
   font-weight: 900;
 }
 
 .payment-result.success .payment-result-icon {
   background: #e8f8ef;
+
   color: #238b57;
 }
 
 .payment-result.failure .payment-result-icon {
   background: #fff0f0;
+
   color: #b23030;
 }
 
+/* ===========================================================
+   RESULT DETAILS
+=========================================================== */
+
 .payment-result-details {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 28px 0;
+
+  gap: 9px;
+
+  margin: 21px 0;
 }
 
 .payment-result-details > div {
-  padding: 16px 10px;
-  border-radius: 14px;
+  padding: 12px 8px;
+
+  border-radius: 11px;
+
   background: #faf8f7;
 }
 
 .payment-result-details span {
   display: block;
-  margin-bottom: 6px;
+
+  margin-bottom: 4px;
+
   color: var(--text-light);
+
+  font-size: 9px;
+}
+
+.payment-result-details strong {
   font-size: 11px;
 }
 
+/* ===========================================================
+   RESULT ACTIONS
+=========================================================== */
+
 .payment-result-actions {
   display: flex;
+
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+
+  gap: 9px;
 }
 
 .payment-result-actions button,
 .payment-result-actions a {
-  padding: 13px 19px;
-  border-radius: 12px;
+  padding: 10px 15px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
   font-weight: 800;
 }
 
 .payment-result-actions button {
   background: var(--primary-color);
+
   color: white;
 }
 
 .payment-result-actions a {
   border: 1px solid var(--border-color);
+
+  color: var(--text-dark);
+
+  background: white;
 }
+
+/* ===========================================================
+   LOADING / STATE
+=========================================================== */
 
 .payment-state {
   text-align: center;
+
   color: var(--text-light);
 }
 
 .payment-state > span {
-  font-size: 45px;
+  font-size: 37px;
 }
 
 .payment-state h2 {
   color: var(--text-dark);
+
+  font-size: 22px;
+}
+
+.payment-state p {
+  font-size: 13px;
 }
 
 .payment-spinner {
-  width: 44px;
-  height: 44px;
-  border: 4px solid #f1ded4;
+  width: 36px;
+  height: 36px;
+
+  border: 3px solid #f1ded4;
   border-top-color: var(--primary-color);
+
   border-radius: 50%;
+
   animation: payment-spin 0.8s linear infinite;
 }
 
@@ -239,10 +430,20 @@
   }
 }
 
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
 @media (max-width: 600px) {
+  .payment-page,
+  .payment-result-page,
+  .payment-state {
+    padding: 25px 15px 50px;
+  }
+
   .payment-card,
   .payment-result {
-    padding: 27px 21px;
+    padding: 23px 18px;
   }
 
   .payment-actions,
@@ -252,7 +453,8 @@
 
   .payment-order-box > div {
     flex-direction: column;
-    gap: 5px;
+
+    gap: 4px;
   }
 
   .payment-order-box small {

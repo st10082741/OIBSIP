@@ -8,18 +8,29 @@
   padding: 32px 0 60px;
 }
 
+/* ===========================================================
+   ORDERS HEADER
+=========================================================== */
+
 .orders-header {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 
-  gap: 20px;
+  gap: 16px;
 
-  margin-bottom: 28px;
+  margin-bottom: 30px;
+
+  text-align: center;
 }
 
-.orders-eyebrow,
-.order-number-label {
+.orders-header > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orders-eyebrow {
   display: block;
 
   margin-bottom: 7px;
@@ -27,6 +38,81 @@
   color: #ff6235;
 
   font-size: 0.65rem;
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.orders-header h1 {
+  margin: 0;
+
+  color: #191919;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+}
+
+.orders-header p {
+  max-width: 540px;
+
+  margin: 11px auto 0;
+
+  color: #686868;
+
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+/* ===========================================================
+   ORDER COUNT
+=========================================================== */
+
+.orders-count {
+  min-width: auto;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 8px 14px;
+
+  border: 1px solid #f0e7e1;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  box-shadow: 0 7px 20px rgba(39, 24, 15, 0.045);
+}
+
+.orders-count strong {
+  display: inline;
+
+  color: #ff6235;
+
+  font-size: 0.9rem;
+}
+
+.orders-count span {
+  color: #666;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.orders-eyebrow,
+.order-number-label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #ff6235;
+
+  font-size: 0.63rem;
   font-weight: 800;
   letter-spacing: 0.14em;
 
@@ -46,27 +132,27 @@
 .orders-header p {
   max-width: 520px;
 
-  margin: 11px 0 0;
+  margin: 10px 0 0;
 
   color: #686868;
 
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
 .orders-count {
-  min-width: 88px;
+  min-width: 84px;
 
-  padding: 13px 17px;
+  padding: 11px 15px;
 
   border: 1px solid #f0e7e1;
-  border-radius: 14px;
+  border-radius: 13px;
 
   background: white;
 
   text-align: center;
 
-  box-shadow: 0 9px 26px rgba(39, 24, 15, 0.05);
+  box-shadow: 0 8px 24px rgba(39, 24, 15, 0.05);
 }
 
 .orders-count strong {
@@ -74,13 +160,13 @@
 
   color: #ff6235;
 
-  font-size: 1.35rem;
+  font-size: 1.25rem;
 }
 
 .orders-count span {
   color: #777;
 
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
 }
 
@@ -91,18 +177,18 @@
 .orders-list {
   display: grid;
 
-  gap: 18px;
+  gap: 15px;
 }
 
 .order-card {
   overflow: hidden;
 
   border: 1px solid #f0e6df;
-  border-radius: 18px;
+  border-radius: 16px;
 
   background: #ffffff;
 
-  box-shadow: 0 13px 38px rgba(54, 32, 19, 0.06);
+  box-shadow: 0 11px 32px rgba(54, 32, 19, 0.055);
 }
 
 .order-card-header {
@@ -110,9 +196,9 @@
   align-items: center;
   justify-content: space-between;
 
-  gap: 15px;
+  gap: 14px;
 
-  padding: 20px 23px;
+  padding: 16px 20px;
 
   border-bottom: 1px solid #f2ebe6;
 }
@@ -122,36 +208,36 @@
 
   color: #191919;
 
-  font-size: 1.12rem;
+  font-size: 1.05rem;
 }
 
 .order-card-header p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
 
   color: #858585;
 
-  font-size: 0.73rem;
+  font-size: 0.7rem;
 }
 
 .order-header-right {
   display: flex;
   align-items: center;
 
-  gap: 13px;
+  gap: 11px;
 }
 
 .order-header-right > strong {
   color: #ff6235;
 
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .payment-badge {
-  padding: 6px 10px;
+  padding: 5px 9px;
 
   border-radius: 999px;
 
-  font-size: 0.64rem;
+  font-size: 0.61rem;
   font-weight: 800;
 }
 
@@ -178,13 +264,13 @@
   display: flex;
   align-items: flex-start;
 
-  padding: 23px;
+  padding: 16px 18px;
 
   background: #fffaf6;
 }
 
 .tracking-step {
-  width: 105px;
+  width: 92px;
 
   flex-shrink: 0;
 
@@ -196,10 +282,10 @@
 .tracking-circle {
   display: grid;
 
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
 
   place-items: center;
 
@@ -208,12 +294,12 @@
 
   background: white;
 
-  font-size: 0.68rem;
+  font-size: 0.6rem;
   font-weight: 800;
 }
 
 .tracking-step span {
-  font-size: 0.66rem;
+  font-size: 0.61rem;
   font-weight: 800;
 }
 
@@ -230,11 +316,11 @@
 }
 
 .tracking-line {
-  height: 3px;
+  height: 2px;
 
   flex: 1;
 
-  margin-top: 15px;
+  margin-top: 13px;
 
   border-radius: 999px;
 
@@ -250,16 +336,16 @@
 =========================================================== */
 
 .order-items {
-  padding: 7px 23px;
+  padding: 5px 20px;
 }
 
 .order-item {
   display: flex;
   align-items: center;
 
-  gap: 13px;
+  gap: 11px;
 
-  padding: 15px 0;
+  padding: 12px 0;
 
   border-bottom: 1px solid #f3ece7;
 }
@@ -271,18 +357,18 @@
 .order-item-icon {
   display: grid;
 
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
 
   flex-shrink: 0;
 
   place-items: center;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: #fff1e8;
 
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .order-item-information {
@@ -294,26 +380,26 @@
 .order-item-information strong {
   color: #202020;
 
-  font-size: 0.86rem;
+  font-size: 0.82rem;
 }
 
 .order-item-information p {
-  margin: 4px 0;
+  margin: 3px 0;
 
   color: #777;
 
-  font-size: 0.7rem;
-  line-height: 1.45;
+  font-size: 0.67rem;
+  line-height: 1.4;
 }
 
 .order-item-information span {
   display: block;
 
-  margin-top: 4px;
+  margin-top: 3px;
 
   color: #8a8a8a;
 
-  font-size: 0.68rem;
+  font-size: 0.65rem;
 }
 
 .order-item-subtotal {
@@ -321,7 +407,7 @@
 
   white-space: nowrap;
 
-  font-size: 0.82rem;
+  font-size: 0.78rem;
 }
 
 /* ===========================================================
@@ -333,9 +419,9 @@
   align-items: center;
   justify-content: space-between;
 
-  gap: 18px;
+  gap: 16px;
 
-  padding: 17px 23px;
+  padding: 14px 20px;
 
   border-top: 1px solid #f2ebe6;
 
@@ -345,17 +431,17 @@
 .order-card-footer span {
   display: block;
 
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 
   color: #929292;
 
-  font-size: 0.64rem;
+  font-size: 0.61rem;
 }
 
 .order-card-footer strong {
   color: #292929;
 
-  font-size: 0.76rem;
+  font-size: 0.72rem;
 }
 
 .order-total {
@@ -365,7 +451,7 @@
 .order-total strong {
   color: #ff6235;
 
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 /* ===========================================================
@@ -509,19 +595,28 @@
   }
 
   .order-tracking {
-    padding: 20px 12px;
+    padding: 16px 10px;
   }
 
   .tracking-step {
-    width: 78px;
+    width: 70px;
   }
 
   .tracking-step span {
-    font-size: 0.58rem;
+    font-size: 0.55rem;
+  }
+
+  .tracking-circle {
+    width: 26px;
+    height: 26px;
+  }
+
+  .tracking-line {
+    margin-top: 12px;
   }
 
   .order-items {
-    padding: 6px 16px;
+    padding: 5px 15px;
   }
 
   .order-total {
