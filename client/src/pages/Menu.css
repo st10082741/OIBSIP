@@ -1,9 +1,12 @@
+/* ===========================================================
+   MENU PAGE
+   Compact customer-facing menu layout
+=========================================================== */
+
 .menu-page {
-  max-width: 1350px;
-
+  max-width: 1050px;
   margin: 0 auto;
-
-  padding: 55px 30px 90px;
+  padding: 30px 20px 60px;
 }
 
 /* ===========================================================
@@ -11,43 +14,37 @@
 =========================================================== */
 
 .menu-hero {
-  max-width: 720px;
-
-  margin: 0 auto 45px;
-
+  max-width: 600px;
+  margin: 0 auto 30px;
   text-align: center;
 }
 
 .menu-eyebrow {
   display: inline-block;
 
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 
   color: var(--primary-color);
 
-  font-size: 13px;
-
+  font-size: 10px;
   font-weight: 800;
-
-  letter-spacing: 1.6px;
-
+  letter-spacing: 1.3px;
   text-transform: uppercase;
 }
 
 .menu-hero h1 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
-  font-size: clamp(38px, 5vw, 58px);
-
+  font-size: clamp(30px, 4vw, 42px);
   line-height: 1.08;
+  letter-spacing: -1px;
 }
 
 .menu-hero p {
   color: var(--text-light);
 
-  font-size: 18px;
-
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 /* ===========================================================
@@ -55,15 +52,13 @@
 =========================================================== */
 
 .menu-control-card {
-  margin-bottom: 38px;
-
-  padding: 20px;
+  margin-bottom: 26px;
+  padding: 15px;
 
   background: rgba(255, 255, 255, 0.85);
 
   border: 1px solid rgba(0, 0, 0, 0.06);
-
-  border-radius: 20px;
+  border-radius: 15px;
 
   box-shadow: var(--shadow-sm);
 }
@@ -71,22 +66,21 @@
 .menu-toolbar {
   display: flex;
 
-  gap: 15px;
+  gap: 11px;
 
-  margin-bottom: 18px;
+  margin-bottom: 13px;
 }
 
 .search-bar,
 .sort-dropdown {
-  padding: 14px 16px;
+  padding: 10px 13px;
 
   border: 1px solid var(--border-color);
-
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: white;
 
-  font-size: 15px;
+  font-size: 13px;
 
   transition: 0.2s;
 }
@@ -96,7 +90,7 @@
 }
 
 .sort-dropdown {
-  min-width: 220px;
+  min-width: 180px;
 }
 
 .search-bar:focus,
@@ -105,7 +99,7 @@
 
   border-color: var(--primary-color);
 
-  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.09);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.09);
 }
 
 /* ===========================================================
@@ -114,14 +108,13 @@
 
 .category-buttons {
   display: flex;
-
   flex-wrap: wrap;
 
-  gap: 9px;
+  gap: 7px;
 }
 
 .category-buttons button {
-  padding: 10px 17px;
+  padding: 7px 13px;
 
   border-radius: 50px;
 
@@ -129,6 +122,7 @@
 
   color: #555;
 
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -144,21 +138,25 @@
 =========================================================== */
 
 .menu-results {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 
   color: var(--text-light);
 
-  font-size: 14px;
-
+  font-size: 12px;
   font-weight: 700;
 }
+
+/*
+   Keep the desktop grid consistent with the Home dashboard.
+   PizzaCard.css controls the actual internal card dimensions.
+*/
 
 .pizza-grid {
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  gap: 27px;
+  gap: 16px;
 }
 
 /* ===========================================================
@@ -166,30 +164,31 @@
 =========================================================== */
 
 .menu-state {
-  min-height: 300px;
+  min-height: 220px;
 
   display: flex;
-
   flex-direction: column;
 
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 8px;
 
   text-align: center;
 
   color: var(--text-light);
+
+  font-size: 13px;
 }
 
 .menu-state > span {
-  font-size: 45px;
+  font-size: 36px;
 }
 
 .menu-state h3 {
   color: var(--text-dark);
 
-  font-size: 23px;
+  font-size: 19px;
 }
 
 .menu-state.error h3 {
@@ -197,11 +196,10 @@
 }
 
 .menu-loader {
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
 
-  border: 4px solid #f1ddd3;
-
+  border: 3px solid #f1ddd3;
   border-top-color: var(--primary-color);
 
   border-radius: 50%;
@@ -216,12 +214,30 @@
 }
 
 /* ===========================================================
-   RESPONSIVE
+   RESPONSIVE - TABLET
+=========================================================== */
+
+@media (max-width: 900px) {
+  .pizza-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ===========================================================
+   RESPONSIVE - MOBILE
 =========================================================== */
 
 @media (max-width: 700px) {
   .menu-page {
-    padding: 40px 18px 70px;
+    padding: 28px 16px 55px;
+  }
+
+  .menu-hero {
+    margin-bottom: 24px;
+  }
+
+  .menu-hero h1 {
+    font-size: clamp(30px, 9vw, 38px);
   }
 
   .menu-toolbar {
@@ -230,7 +246,10 @@
 
   .sort-dropdown {
     width: 100%;
-
     min-width: 0;
+  }
+
+  .pizza-grid {
+    grid-template-columns: 1fr;
   }
 }

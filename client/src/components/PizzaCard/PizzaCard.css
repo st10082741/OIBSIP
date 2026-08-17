@@ -1,19 +1,17 @@
 /* ===========================================================
-   MODERN PIZZA CARD
+   COMPACT MODERN PIZZA CARD
 =========================================================== */
 
 .pizza-card {
   position: relative;
-
   overflow: hidden;
 
   background: #ffffff;
 
   border: 1px solid rgba(30, 30, 30, 0.06);
+  border-radius: 16px;
 
-  border-radius: 22px;
-
-  box-shadow: 0 8px 30px rgba(40, 30, 20, 0.07);
+  box-shadow: 0 6px 22px rgba(40, 30, 20, 0.06);
 
   transition:
     transform 0.3s ease,
@@ -21,9 +19,9 @@
 }
 
 .pizza-card:hover {
-  transform: translateY(-7px);
+  transform: translateY(-4px);
 
-  box-shadow: 0 20px 45px rgba(40, 30, 20, 0.13);
+  box-shadow: 0 14px 32px rgba(40, 30, 20, 0.11);
 }
 
 /* ===========================================================
@@ -33,7 +31,7 @@
 .pizza-image-container {
   position: relative;
 
-  height: 235px;
+  height: 175px;
 
   overflow: hidden;
 
@@ -50,7 +48,7 @@
 }
 
 .pizza-card:hover .pizza-image {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 /* Pizza without uploaded image */
@@ -65,17 +63,19 @@
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 7px;
 
   background: radial-gradient(circle at center, #fff8f2, #ffe9da);
 }
 
 .pizza-image-placeholder span {
-  font-size: 70px;
+  font-size: 52px;
 }
 
 .pizza-image-placeholder small {
   color: #9b725f;
+
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -86,23 +86,22 @@
 .popular-badge,
 .pizza-category-badge {
   position: absolute;
-  top: 15px;
+  top: 11px;
 
   z-index: 2;
 
-  padding: 7px 12px;
+  padding: 5px 9px;
 
   border-radius: 50px;
 
-  font-size: 12px;
-
+  font-size: 10px;
   font-weight: 800;
 
   backdrop-filter: blur(8px);
 }
 
 .popular-badge {
-  left: 15px;
+  left: 11px;
 
   background: rgba(255, 107, 53, 0.94);
 
@@ -110,7 +109,7 @@
 }
 
 .pizza-category-badge {
-  right: 15px;
+  right: 11px;
 
   background: rgba(255, 255, 255, 0.9);
 
@@ -122,7 +121,7 @@
 =========================================================== */
 
 .pizza-content {
-  padding: 24px;
+  padding: 17px;
 }
 
 .pizza-title-row {
@@ -131,41 +130,42 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  gap: 14px;
+  gap: 10px;
 
-  margin-bottom: 12px;
+  margin-bottom: 9px;
 }
 
 .pizza-title-row h3 {
-  font-size: 21px;
+  margin: 0;
 
+  font-size: 17px;
   line-height: 1.2;
 }
 
 .rating {
   flex-shrink: 0;
 
-  color: #9a7100;
+  padding: 4px 7px;
 
-  font-size: 13px;
-
-  font-weight: 800;
+  border-radius: 50px;
 
   background: #fff8d9;
 
-  padding: 6px 9px;
+  color: #9a7100;
 
-  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .pizza-description {
-  min-height: 52px;
+  min-height: 42px;
 
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 
   color: var(--text-light);
 
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* ===========================================================
@@ -178,29 +178,61 @@
   justify-content: space-between;
   align-items: center;
 
-  gap: 15px;
+  gap: 12px;
 }
 
 .price-label {
   display: block;
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 
   color: #999;
 
-  font-size: 11px;
+  font-size: 9px;
 
   text-transform: uppercase;
 
-  letter-spacing: 0.7px;
+  letter-spacing: 0.6px;
 
   font-weight: 700;
 }
 
 .card-footer h4 {
+  margin: 0;
+
   color: var(--primary-color);
 
-  font-size: 22px;
+  font-size: 18px;
+}
 
-  margin: 0;
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media (max-width: 750px) {
+  .pizza-image-container {
+    height: 190px;
+  }
+
+  .pizza-content {
+    padding: 16px;
+  }
+
+  .pizza-title-row h3 {
+    font-size: 17px;
+  }
+
+  .pizza-description {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .pizza-image-container {
+    height: 180px;
+  }
+
+  .pizza-content {
+    padding: 15px;
+  }
 }

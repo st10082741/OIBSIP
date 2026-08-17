@@ -3,9 +3,9 @@
 =========================================================== */
 
 .builder-page {
-  max-width: 1400px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 40px 30px 90px;
+  padding: 30px 22px 70px;
 }
 
 /* ===========================================================
@@ -17,12 +17,12 @@
   justify-content: space-between;
   align-items: center;
 
-  gap: 40px;
+  gap: 30px;
 
-  margin-bottom: 30px;
-  padding: 42px 48px;
+  margin-bottom: 24px;
+  padding: 34px 38px;
 
-  border-radius: 28px;
+  border-radius: 24px;
 
   background:
     radial-gradient(
@@ -34,24 +34,24 @@
 
   color: white;
 
-  box-shadow: 0 20px 60px rgba(80, 35, 18, 0.18);
+  box-shadow: 0 17px 48px rgba(80, 35, 18, 0.16);
 }
 
 .builder-hero > div:first-child {
-  max-width: 760px;
+  max-width: 680px;
 }
 
 .builder-eyebrow {
   display: inline-block;
 
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 
   color: var(--primary-color);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
 
-  letter-spacing: 1.5px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
 }
 
@@ -60,25 +60,25 @@
 }
 
 .builder-hero h1 {
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 
-  font-size: clamp(38px, 5vw, 58px);
+  font-size: clamp(34px, 4vw, 48px);
 
   line-height: 1.05;
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
 }
 
 .builder-hero p {
-  max-width: 680px;
+  max-width: 620px;
 
   color: rgba(255, 255, 255, 0.76);
 
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .builder-hero-badge {
-  min-width: 170px;
+  min-width: 145px;
 
   display: flex;
   flex-direction: column;
@@ -88,11 +88,11 @@
 
   gap: 4px;
 
-  padding: 25px;
+  padding: 20px;
 
   border: 1px solid rgba(255, 255, 255, 0.18);
 
-  border-radius: 22px;
+  border-radius: 18px;
 
   background: rgba(255, 255, 255, 0.1);
 
@@ -100,15 +100,17 @@
 }
 
 .builder-hero-badge > span {
-  font-size: 52px;
+  font-size: 44px;
 }
 
 .builder-hero-badge strong {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .builder-hero-badge small {
   color: rgba(255, 255, 255, 0.65);
+
+  font-size: 11px;
 }
 
 /* ===========================================================
@@ -116,11 +118,11 @@
 =========================================================== */
 
 .builder-shell {
-  padding: 28px;
+  padding: 22px;
 
   border: 1px solid rgba(0, 0, 0, 0.06);
 
-  border-radius: 28px;
+  border-radius: 22px;
 
   background: white;
 
@@ -136,9 +138,9 @@
 
   grid-template-columns: repeat(4, 1fr);
 
-  gap: 12px;
+  gap: 10px;
 
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .builder-step {
@@ -146,11 +148,11 @@
 
   align-items: center;
 
-  gap: 12px;
+  gap: 10px;
 
-  padding: 14px;
+  padding: 11px;
 
-  border-radius: 15px;
+  border-radius: 12px;
 
   color: #999;
 
@@ -160,8 +162,8 @@
 }
 
 .builder-step-number {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
 
   display: grid;
   place-items: center;
@@ -172,19 +174,22 @@
 
   background: #e8e8e8;
 
+  font-size: 12px;
   font-weight: 900;
 }
 
 .builder-step strong {
   display: block;
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 
   color: #666;
+
+  font-size: 13px;
 }
 
 .builder-step span {
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .builder-step.active {
@@ -212,9 +217,9 @@
 .builder-content-grid {
   display: grid;
 
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) 320px;
 
-  gap: 25px;
+  gap: 20px;
 
   align-items: start;
 }
@@ -222,43 +227,42 @@
 .builder-main-card {
   min-width: 0;
 
-  padding: 30px;
+  padding: 24px;
 
-  border-radius: 22px;
+  border-radius: 18px;
 
   background: #fffaf7;
 }
 
 .builder-section-header {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .builder-section-header > span {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
   color: var(--primary-color);
 
-  font-size: 12px;
-
+  font-size: 11px;
   font-weight: 900;
 
   text-transform: uppercase;
-
-  letter-spacing: 1px;
+  letter-spacing: 0.9px;
 }
 
 .builder-section-header h2 {
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .builder-section-header p {
   color: var(--text-light);
 
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* ===========================================================
@@ -270,7 +274,7 @@
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 14px;
+  gap: 12px;
 }
 
 .ingredient-card {
@@ -282,15 +286,15 @@
 
   align-items: center;
 
-  gap: 14px;
+  gap: 12px;
 
-  padding: 18px;
+  padding: 15px;
 
   text-align: left;
 
   border: 1px solid #eadfd9;
 
-  border-radius: 17px;
+  border-radius: 14px;
 
   background: white;
 
@@ -302,7 +306,7 @@
 
   border-color: #ffc3a9;
 
-  box-shadow: 0 8px 20px rgba(80, 35, 18, 0.07);
+  box-shadow: 0 7px 18px rgba(80, 35, 18, 0.07);
 }
 
 .ingredient-card.selected {
@@ -314,45 +318,45 @@
 }
 
 .ingredient-icon {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
 
   display: grid;
   place-items: center;
 
-  border-radius: 13px;
+  border-radius: 11px;
 
   background: #fff0e8;
 
-  font-size: 22px;
+  font-size: 19px;
 }
 
 .ingredient-card h3 {
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .ingredient-card p {
   color: var(--text-light);
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .ingredient-card > strong {
   color: var(--primary-color);
 
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .selection-check {
   position: absolute;
 
-  top: 8px;
-  right: 8px;
+  top: 7px;
+  right: 7px;
 
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 
   display: none;
 
@@ -364,8 +368,7 @@
 
   color: white;
 
-  font-size: 11px;
-
+  font-size: 10px;
   font-weight: 900;
 }
 
@@ -382,17 +385,18 @@
 
   justify-content: space-between;
 
-  gap: 15px;
+  gap: 12px;
 
-  margin-top: 30px;
+  margin-top: 24px;
 }
 
 .builder-back-btn,
 .builder-next-btn {
-  padding: 13px 21px;
+  padding: 11px 18px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
+  font-size: 13px;
   font-weight: 800;
 }
 
@@ -430,46 +434,46 @@
 .builder-summary-card {
   position: sticky;
 
-  top: 25px;
+  top: 20px;
 
-  padding: 28px;
+  padding: 22px;
 
-  border-radius: 22px;
+  border-radius: 18px;
 
   background: linear-gradient(180deg, #ffffff, #fff9f5);
 
   border: 1px solid rgba(255, 107, 53, 0.12);
 
-  box-shadow: 0 10px 35px rgba(65, 30, 15, 0.08);
+  box-shadow: 0 9px 28px rgba(65, 30, 15, 0.07);
 }
 
 .summary-pizza-visual {
-  width: 95px;
-  height: 95px;
+  width: 78px;
+  height: 78px;
 
   display: grid;
   place-items: center;
 
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
 
   border-radius: 50%;
 
   background: #fff0e8;
 
-  font-size: 58px;
+  font-size: 46px;
 }
 
 .builder-summary-card h2 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
-  font-size: 25px;
+  font-size: 21px;
 }
 
 .builder-summary-list {
   display: flex;
   flex-direction: column;
 
-  gap: 14px;
+  gap: 11px;
 }
 
 .builder-summary-list > div {
@@ -477,9 +481,9 @@
 
   justify-content: space-between;
 
-  gap: 16px;
+  gap: 13px;
 
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 
   border-bottom: 1px solid #eee7e3;
 }
@@ -487,15 +491,15 @@
 .builder-summary-list span {
   color: var(--text-light);
 
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .builder-summary-list strong {
-  max-width: 190px;
+  max-width: 170px;
 
   text-align: right;
 
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .builder-price-preview {
@@ -504,13 +508,13 @@
   justify-content: space-between;
   align-items: center;
 
-  gap: 15px;
+  gap: 12px;
 
-  margin-top: 22px;
+  margin-top: 18px;
 
-  padding: 17px;
+  padding: 14px;
 
-  border-radius: 14px;
+  border-radius: 11px;
 
   background: #2d1912;
 
@@ -520,13 +524,13 @@
 .builder-price-preview span {
   color: rgba(255, 255, 255, 0.65);
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .builder-price-preview strong {
   color: #ffb99a;
 
-  font-size: 22px;
+  font-size: 19px;
 }
 
 /* ===========================================================
@@ -534,13 +538,13 @@
 =========================================================== */
 
 .builder-confirmed {
-  margin-top: 18px;
+  margin-top: 15px;
 
-  padding: 16px;
+  padding: 13px;
 
   border: 1px solid #bee6cb;
 
-  border-radius: 14px;
+  border-radius: 11px;
 
   background: #effaf3;
 }
@@ -548,16 +552,16 @@
 .builder-confirmed > div {
   display: flex;
 
-  gap: 10px;
+  gap: 8px;
 
-  margin-bottom: 13px;
+  margin-bottom: 11px;
 
   color: #196d3d;
 }
 
 .builder-confirmed > div > span {
-  width: 27px;
-  height: 27px;
+  width: 24px;
+  height: 24px;
 
   display: grid;
   place-items: center;
@@ -567,6 +571,8 @@
   background: #2c9a5c;
 
   color: white;
+
+  font-size: 11px;
 }
 
 .builder-confirmed p {
@@ -574,20 +580,21 @@
 
   color: #5e846c;
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .builder-confirmed button {
   width: 100%;
 
-  padding: 12px;
+  padding: 10px;
 
-  border-radius: 10px;
+  border-radius: 9px;
 
   background: #2c9a5c;
 
   color: white;
 
+  font-size: 13px;
   font-weight: 800;
 }
 
@@ -596,16 +603,15 @@
 =========================================================== */
 
 .builder-state {
-  min-height: 70vh;
+  min-height: 60vh;
 
   display: flex;
-
   flex-direction: column;
 
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 9px;
 
   text-align: center;
 
@@ -613,14 +619,14 @@
 }
 
 .builder-state > span {
-  font-size: 55px;
+  font-size: 46px;
 }
 
 .builder-spinner {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
 
-  border: 4px solid #f0ddd4;
+  border: 3px solid #f0ddd4;
 
   border-top-color: var(--primary-color);
 
@@ -636,20 +642,19 @@
 }
 
 .builder-error {
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 
-  padding: 13px 15px;
+  padding: 11px 13px;
 
   border: 1px solid #f0c8c8;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: #fff2f2;
 
   color: #9a2929;
 
-  font-size: 14px;
-
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -673,7 +678,7 @@
   }
 
   .builder-hero {
-    padding: 35px;
+    padding: 30px;
 
     flex-direction: column;
 
@@ -687,15 +692,15 @@
 
 @media (max-width: 650px) {
   .builder-page {
-    padding: 20px 15px 70px;
+    padding: 18px 15px 60px;
   }
 
   .builder-shell {
-    padding: 15px;
+    padding: 14px;
   }
 
   .builder-main-card {
-    padding: 20px;
+    padding: 18px;
   }
 
   .ingredient-grid {
