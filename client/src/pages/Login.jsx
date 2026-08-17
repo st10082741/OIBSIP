@@ -23,6 +23,8 @@ function Login() {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -119,6 +121,10 @@ function Login() {
 
             {error && <div className="auth-message error">{error}</div>}
 
+            {/* ==================================================
+                EMAIL
+            ================================================== */}
+
             <div className="auth-field">
               <label htmlFor="email">Email address</label>
 
@@ -134,19 +140,40 @@ function Login() {
               />
             </div>
 
+            {/* ==================================================
+                PASSWORD
+            ================================================== */}
+
             <div className="auth-field">
               <label htmlFor="password">Password</label>
 
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-                disabled={loading}
-              />
+              <div className="auth-password-wrapper">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="current-password"
+                  placeholder="Enter your password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() => setShowPassword((previous) => !previous)}
+                  disabled={loading}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                >
+                  <span aria-hidden="true">{showPassword ? "🙈" : "👁️"}</span>
+
+                  <span className="auth-password-toggle-text">
+                    {showPassword ? "Hide" : "Show"}
+                  </span>
+                </button>
+              </div>
             </div>
 
             <div className="auth-helper-row">
