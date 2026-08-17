@@ -1421,7 +1421,8 @@ MONGODB_URI=<MongoDB Atlas connection string>
 
 #### Render Free-Tier Behaviour
 
-The backend is currently deployed using Render's free hosting tier. Free-tier services can experience a startup delay after periods of inactivity.
+The backend is currently deployed using Render's free hosting tier. Free-tier services can experience a
+startup delay after periods of inactivity.
 
 During this startup period, the frontend may temporarily appear to be waiting for a response because authentication and other application functionality depend on the Render-hosted API.
 
