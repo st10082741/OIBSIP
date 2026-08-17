@@ -19,9 +19,17 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
 
+  // Show / hide password controls.
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
+
+  // ============================================================
+  // HANDLE INPUT CHANGES
+  // ============================================================
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,6 +41,10 @@ function Register() {
 
     setError("");
   };
+
+  // ============================================================
+  // REGISTER CUSTOMER
+  // ============================================================
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -82,6 +94,10 @@ function Register() {
         password: "",
         confirmPassword: "",
       });
+
+      // Reset password visibility after successful registration.
+      setShowPassword(false);
+      setShowConfirmPassword(false);
     } catch (requestError) {
       setError(
         requestError.response?.data?.message ||
@@ -94,11 +110,16 @@ function Register() {
 
   return (
     <div className="auth-page">
+      {/* ======================================================
+          BRAND PANEL
+      ====================================================== */}
+
       <section className="auth-brand-panel">
         <div className="auth-logo">🍕 Pizza Delivery</div>
 
         <div className="auth-brand-content">
           <h2>Create it. Customize it. Track it.</h2>
+
           <p>
             Join Pizza Delivery and build pizzas exactly the way you want them,
             from the base all the way to your favourite vegetables.
@@ -108,15 +129,25 @@ function Register() {
         <div className="auth-brand-footer">Your perfect pizza starts here.</div>
       </section>
 
+      {/* ======================================================
+          REGISTRATION FORM
+      ====================================================== */}
+
       <section className="auth-form-panel">
         <div className="auth-form-wrapper">
           <header className="auth-form-header">
             <span className="auth-eyebrow">Create account</span>
+
             <h1>Join us</h1>
+
             <p>Register and verify your email before your first login.</p>
           </header>
 
           <form className="auth-form" onSubmit={handleSubmit}>
+            {/* =================================================
+                SUCCESS MESSAGE
+            ================================================= */}
+
             {successMessage && (
               <div className="auth-message success">
                 {successMessage}
@@ -126,10 +157,19 @@ function Register() {
               </div>
             )}
 
+            {/* =================================================
+                ERROR MESSAGE
+            ================================================= */}
+
             {error && <div className="auth-message error">{error}</div>}
+
+            {/* =================================================
+                FULL NAME
+            ================================================= */}
 
             <div className="auth-field">
               <label htmlFor="name">Full name</label>
+
               <input
                 id="name"
                 name="name"
@@ -142,8 +182,13 @@ function Register() {
               />
             </div>
 
+            {/* =================================================
+                EMAIL
+            ================================================= */}
+
             <div className="auth-field">
               <label htmlFor="register-email">Email address</label>
+
               <input
                 id="register-email"
                 name="email"
@@ -156,33 +201,79 @@ function Register() {
               />
             </div>
 
+            {/* =================================================
+                PASSWORD
+            ================================================= */}
+
             <div className="auth-field">
               <label htmlFor="register-password">Password</label>
-              <input
-                id="register-password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                placeholder="8+ characters with Aa, 1 and @"
-                value={formData.password}
-                onChange={handleChange}
-                disabled={loading}
-              />
+
+              <div className="auth-password-wrapper">
+                <input
+                  id="register-password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="8+ characters with Aa, 1 and @"
+                  value={formData.password}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() =>
+                    setShowPassword((currentValue) => !currentValue)
+                  }
+                  disabled={loading}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
+
+            {/* =================================================
+                CONFIRM PASSWORD
+            ================================================= */}
 
             <div className="auth-field">
               <label htmlFor="confirmPassword">Confirm password</label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                placeholder="Repeat your password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                disabled={loading}
-              />
+
+              <div className="auth-password-wrapper">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Repeat your password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  disabled={loading}
+                />
+
+                <button
+                  type="button"
+                  className="auth-password-toggle"
+                  onClick={() =>
+                    setShowConfirmPassword((currentValue) => !currentValue)
+                  }
+                  disabled={loading}
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
+                >
+                  {showConfirmPassword ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
+
+            {/* =================================================
+                SUBMIT
+            ================================================= */}
 
             <button className="auth-submit" type="submit" disabled={loading}>
               {loading ? "Creating account..." : "Create Account"}

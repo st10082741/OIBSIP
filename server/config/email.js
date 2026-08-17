@@ -3,32 +3,48 @@
                 EMAIL CONFIGURATION
 ==============================================================
 
-This file creates the Nodemailer transporter
-used throughout the application to send emails.
+This file handles application email delivery using the
+Resend HTTPS API.
 
-Examples:
+Resend is used instead of SMTP because the deployed backend
+runs on Render's free tier, where outbound SMTP ports are
+restricted.
+
+Used for:
 • Email Verification
 • Password Reset
-• Notifications
+• Application Notifications
 
 ==============================================================
 */
 
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-// Create Gmail transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// Create the Resend client using the API key stored
+// securely in the environment variables.
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Function used to send emails
+// =============================================================
+// SEND EMAIL
+// =============================================================
+
 const sendEmail = async (mailOptions) => {
-  return await transporter.sendMail(mailOptions);
+  const { to, subject, html } = mailOptions;
+
+  const { data, error } = await resend.emails.send({
+    from:
+      process.env.EMAIL_FROM ||
+      "Victor's Pizza Delivery <onboarding@resend.dev>",
+    to,
+    subject,
+    html,
+  });
+
+  if (error) {
+    throw new Error(error.message || "Email could not be sent.");
+  }
+
+  return data;
 };
 
-// Export sendEmail function
 module.exports = sendEmail;
