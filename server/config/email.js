@@ -3,10 +3,10 @@
                 EMAIL CONFIGURATION
 ==============================================================
 
-This file handles application email delivery using the
-Resend HTTPS API.
+This file handles transactional email delivery using
+Brevo's HTTPS API.
 
-Resend is used instead of SMTP because the deployed backend
+Brevo is used instead of SMTP because the deployed backend
 runs on Render's free tier, where outbound SMTP ports are
 restricted.
 
@@ -18,12 +18,6 @@ Used for:
 ==============================================================
 */
 
-const { Resend } = require("resend");
-
-// Create the Resend client using the API key stored
-// securely in the environment variables.
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // =============================================================
 // SEND EMAIL
 // =============================================================
@@ -31,20 +25,43 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sendEmail = async (mailOptions) => {
   const { to, subject, html } = mailOptions;
 
-  const { data, error } = await resend.emails.send({
-    from:
-      process.env.EMAIL_FROM ||
-      "Victor's Pizza Delivery <onboarding@resend.dev>",
-    to,
-    subject,
-    html,
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+
+    headers: {
+      accept: "application/json",
+      "api-key": process.env.BREVO_API_KEY,
+      "content-type": "application/json",
+    },
+
+    body: JSON.stringify({
+      sender: {
+        name: process.env.BREVO_SENDER_NAME || "Victor's Pizza Delivery",
+        email: process.env.BREVO_SENDER_EMAIL,
+      },
+
+      to: [
+        {
+          email: to,
+        },
+      ],
+
+      subject,
+      htmlContent: html,
+    }),
   });
 
-  if (error) {
-    throw new Error(error.message || "Email could not be sent.");
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      result.message ||
+        result.error ||
+        "The email could not be sent through Brevo.",
+    );
   }
 
-  return data;
+  return result;
 };
 
 module.exports = sendEmail;
